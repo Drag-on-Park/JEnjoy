@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block category %}
+    <div class="nav">
+        <a href="/">Home으로 가기</a>
+
+    </div>
+
+    <div class="category">
+        <li><a href="/japet/" class="japet">japet</a></li>
+        <li><a href="/search/" class="search">search</a></li>
+        <li><a href="/write/" class="write">write</a></li>
+        <li><a href="/read/" class="read">read</a></li>
+        <li><a href="/speak/" class="speak">speak</a></li>
+        <li><a href="/user/" class="user">user</a></li>
+        <li><a href="/board/" class="board">board</a></li>
+    </div>
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    
+</body>
+</html>
