@@ -1,29 +1,76 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/a47086679e.js" crossorigin="anonymous"></script>
+
+    <!-- css -->
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    <title>JENJOY</title>
+    
+    <!-- style -->
+    {% block extra_style %}{% endblock %}
 </head>
+
 <body>
-    {% block category %}
-    <div class="nav">
-        <a href="/">Home으로 가기</a>
+    <!-- nav section -->
+    {% block nav %}
+    <nav class="navbar-expand-lg nav_container">
+        <div class="nav_content">
+            <!-- 메뉴 중앙정렬 -->
+            <div class="empty_box">
+            </div>
+            <!-- nav_menu 메뉴 -->
+            <ul class="navbar-nav nav_menu">
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle nav_dropdown" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        STUDY
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="/speak/">SPEAK</a></li>
+                        <li><a class="dropdown-item" href="/read/">READ</a></li>
+                        <li><a class="dropdown-item" href="/write/">WRITE</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/jenmon/" class="jenmon">JENMON</a>
+                </li>
+                <li class="nav-item logo">
+                    <a href="/" class="home" 
+                    style="background-image: url('{% static 'images/Blob.png' %}'); 
+                    background-repeat: no-repeat; 
+                    background-size: contain; 
+                    background-position: center;">
+                    JENJOY</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/board/" class="board">BOARD</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dictionary/" class="dictionary">DICTIONARY</a>
+                </li>
+            </ul>
 
-    </div>
+            <div class="user">
+                <a href=""><i class="fa-solid fa-user"></i></a>
+            </div>
+            <!--!!-->
+        </div>
+        <!--!!-->
+    </nav>   
+    
+    {% endblock %}
 
-    <div class="category">
-        <li><a href="/japet/" class="japet">japet</a></li>
-        <li><a href="/search/" class="search">search</a></li>
-        <li><a href="/write/" class="write">write</a></li>
-        <li><a href="/read/" class="read">read</a></li>
-        <li><a href="/speak/" class="speak">speak</a></li>
-        <li><a href="/user/" class="user">user</a></li>
-        <li><a href="/board/" class="board">board</a></li>
-    </div>
-    {% endblock %}
-    {% block content %}
-    {% endblock %}
+    <!-- content section -->
+    {% block content %}{% endblock %}
     
 </body>
 </html>
