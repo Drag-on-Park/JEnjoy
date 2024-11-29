@@ -1,10 +1,129 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_style %}
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    .nav_container {
+        margin: 36px;
+        display: flex;
+    }
+
+    .nav_content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav_menu {
+        display: flex;
+        gap: 48px;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-item {
+        display: inline-block;
+    }
+
+    .nav-item a {
+        color: #0B5CD5;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 8px 12px;
+        display: block;
+        transition: color 0.3s ease;
+    }
+
+    .nav-item a:hover {
+        color: #003A99;
+    }
+
+    .user {
+        font-size: 24px;
+    }
+
+    .home_content img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    
+
+
+</style>
+{% endblock %}
+
+<!-- home_nav section -->
+{% block nav %}
+<nav class="navbar-expand-lg nav_container">
+    <div class="nav_content">
+        <!-- 메뉴 중앙정렬 -->
+        <div class="empty_box">
+        </div>
+        <!-- home nav_menu 메뉴 -->
+        <ul class="navbar-nav nav_menu">
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle nav_dropdown" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    STUDY
+                </a>
+                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/speak/">SPEAK</a></li>
+                    <li><a class="dropdown-item" href="/read/">READ</a></li>
+                    <li><a class="dropdown-item" href="/write/">WRITE</a></li>
+                </ul>
+            </li>
+            
+            <li class="nav-item">
+                <a href="/jenmon/" class="jenmon">JENMON</a>
+            </li>
+            <li class="nav-item">
+                <a href="/board/" class="board">BOARD</a>
+            </li>
+            <li class="nav-item">
+                <a href="/dictionary/" class="dictionary">DICTIONARY</a>
+            </li>
+        </ul>
+
+        <div class="user">
+            <a href=""><i class="fa-solid fa-user"></i></a>
+        </div>
+        <!--!!-->
+    </div>
+    <!--!!-->
+</nav>     
+{% endblock %}
 
 {% block content %}
+<div class="home_content">
+    <img src="{% static 'images/Jenjoy_Home.png' %}" alt="Home Image">
+    <div class="home_image_container">
+        
+    </div>
+    <!-- 검색 폼 -->
+    <form id="search-form" action="#" method="post">
+        {% csrf_token %}
+
+        <button id="search-button" type="submit">
+            <span class="material-symbols-outlined" style="font-size: 35px;">
+                search
+                </span>
+        </button>
+    </form>
+
 <h1>🥚&nbsp;&nbsp;JENJOY</h1>
 <p style="font-size: 48px; ">JENJOY</p>
 
 <h2>🐣&nbsp;&nbsp;Learn Japanese and Grow with Your JENMON</h2>
 <button>지금 시작하기</button>
+
+</div>
+
 
 {% endblock %}
