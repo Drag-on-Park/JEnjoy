@@ -1,3 +1,7 @@
+body {
+    font-family: "Noto Sans JP", sans-serif;
+}
+      
 a{
     text-decoration: none;
 }
@@ -6,6 +10,7 @@ a{
     margin: 36px;
     display: flex;
     align-items: center;
+
 }
 
 .nav_content {
@@ -56,6 +61,6 @@ a{
     z-index: 1; 
 }
 
-.user {
+.user_icon {
     font-size: 24px;
 }

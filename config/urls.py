@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/', include('board.urls')),
     path('jenmon/', include('jenmon.urls')),
+    path('dictionary/', include('dictionary.urls')),
     path('read/', include('read.urls')),
     path('speak/', include('speak.urls')),
     path('write/', include('write.urls')),

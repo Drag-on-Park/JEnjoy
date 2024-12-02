@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'speak',
     'user',
     'board',
+    'dictionary',
 
 ]
 
