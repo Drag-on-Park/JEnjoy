@@ -14,9 +14,10 @@
 
     .nav_content {
         display: flex;
-        justify-content: space-between;
+        justify-content: center; /* !! */
         align-items: center;
         width: 100%;
+        position: relative; /* !! */
     }
 
     .nav_menu {
@@ -24,7 +25,7 @@
         gap: 48px;
         list-style-type: none;
         padding: 0;
-        margin: 0;
+        margin: 0 auto; /* !!auto */
     }
 
     .nav-item {
@@ -44,16 +45,127 @@
         color: #003A99;
     }
 
-    .user {
+    .dropdown-menu{
+        background-color: white;
+        border: none;
+        box-shadow: none;
+    }
+    .dropdown-item{
+        transition: background-color 0.3s ease;
+    }
+    .dropdown-item:hover{
+        background-color: #f0f0f0;
+        color: #003A99;
+    }
+    .hamburger_menu {
+        background: none;
+        border: none;
         font-size: 24px;
+        cursor: pointer;
+        display: none;
     }
 
-    .home_content img {
+    .hamburger_menu i {
+        color: #0B5CD5;
+    }
+
+    .user_icon {
+        display: flex; /* !! */
+        font-size: 24px;
+        position: absolute; /* !! */
+        right: 0; /* !! */
+        top: 50%; /* !! */
+        transform: translateY(-50%); /* !! */
+
+    }
+
+    .home_banner {
+        background-image: url("{% static 'images/Jenjoy_Home.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        text-align: center;
+        position: relative;
+    }
+
+    .home_banner img {
         width: 100%;
         height: auto;
         object-fit: cover;
     }
+    #search-form{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: #0B5CD5 1px solid;
+        margin: 60px auto;
+        width: 280px;
+        height: 50px;
+    }
+    .search_input{
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-size: 18px;
+        padding: 4px;
+        color:#0B5CD5;
+        width: 100%;
+    }
+    #search-button{
+        font-size: 36px;
+        border: none;
+        color: #0B5CD5;
+        background-color: transparent;
+    }
 
+    .banner_title{
+        font-size: 60px;
+        margin-top: 400px;
+        color: #FFD700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .banner_description{
+        font-size: 48px;
+        margin-bottom: 300px;
+        color: #00BFFF; 
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+    .play_btn{
+        width: 360px;
+        padding: 16px 0;
+        margin-bottom: 120px;
+        border-radius: 36px;
+        background-color: black;
+        font-size: 36px;
+    }
+    .play_btn a{
+        color: white;
+    }
+
+    @media (max-width: 991px) {
+        .hamburger_menu {
+            display: block;
+        }
+
+        .nav_menu {
+            display: none; 
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .collapse.navbar-collapse.show .nav_menu {
+            display: flex; 
+            justify-content: center; /* !! */
+        }
+
+        .user_icon {
+            /* display: flex; */ /* !! */
+            margin-left: auto;
+            position: static; /* !! */
+            transform: none; /* !! */
+        }
+    }
     
 
 
@@ -65,34 +177,41 @@
 <nav class="navbar-expand-lg nav_container">
     <div class="nav_content">
         <!-- 메뉴 중앙정렬 -->
-        <div class="empty_box">
-        </div>
-        <!-- home nav_menu 메뉴 -->
-        <ul class="navbar-nav nav_menu">
-            <li class="nav-item dropdown">
-                <a class="dropdown-toggle nav_dropdown" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    STUDY
-                </a>
-                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                    <li><a class="dropdown-item" href="/speak/">SPEAK</a></li>
-                    <li><a class="dropdown-item" href="/read/">READ</a></li>
-                    <li><a class="dropdown-item" href="/write/">WRITE</a></li>
-                </ul>
-            </li>
-            
-            <li class="nav-item">
-                <a href="/jenmon/" class="jenmon">JENMON</a>
-            </li>
-            <li class="nav-item">
-                <a href="/board/" class="board">BOARD</a>
-            </li>
-            <li class="nav-item">
-                <a href="/dictionary/" class="dictionary">DICTIONARY</a>
-            </li>
-        </ul>
+        <div class="empty_box"></div>
 
-        <div class="user">
+        <!-- home nav_menu 메뉴 -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav nav_menu">
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle nav_dropdown" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        STUDY
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="/speak/">SPEAK</a></li>
+                        <li><a class="dropdown-item" href="/read/">READ</a></li>
+                        <li><a class="dropdown-item" href="/write/">WRITE</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/jenmon/" class="jenmon">JENMON</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/board/" class="board">BOARD</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/dictionary/" class="dictionary">DICTIONARY</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="user_icon">
+            <a href=""><i class="fa-solid fa-flag-checkered"></i></a>
             <a href=""><i class="fa-solid fa-user"></i></a>
+            <!-- 햄버거 버튼 -->
+            <button class="hamburger_menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
         <!--!!-->
     </div>
@@ -101,29 +220,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="home_content">
-    <img src="{% static 'images/Jenjoy_Home.png' %}" alt="Home Image">
-    <div class="home_image_container">
+<div class="home_container">
+    <div class="home_banner">
         
+        <!-- 검색 폼 -->
+        <form id="search-form" action="#" method="post">
+            {% csrf_token %}
+
+            <input class="search_input" type="text" placeholder="Search">
+            <button id="search-button" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+
+
+        <h1 class="banner_title">JENJOY</p>
+        <h2 class="banner_description">🐣&nbsp;&nbsp;Learn Japanese and Grow with Your JENMON</h2>
+
+        <button class="play_btn"><a href="">Let's Play</a></button>
+
     </div>
-    <!-- 검색 폼 -->
-    <form id="search-form" action="#" method="post">
-        {% csrf_token %}
-
-        <button id="search-button" type="submit">
-            <span class="material-symbols-outlined" style="font-size: 35px;">
-                search
-                </span>
-        </button>
-    </form>
-
-<h1>🥚&nbsp;&nbsp;JENJOY</h1>
-<p style="font-size: 48px; ">JENJOY</p>
-
-<h2>🐣&nbsp;&nbsp;Learn Japanese and Grow with Your JENMON</h2>
-<button>지금 시작하기</button>
-
 </div>
-
 
 {% endblock %}
