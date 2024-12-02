@@ -4,7 +4,8 @@ v 0.0.0
 일본어 말하기, 듣기, 쓰기 사이드 프로젝트
 
 **Home**
-<img width="1710" alt="home_1129" src="https://github.com/user-attachments/assets/0e6cf2d9-d2b4-4195-8def-24912801cf5e">
+<img width="1708" alt="JENJOY_Home_1202" src="https://github.com/user-attachments/assets/1396dd6c-81cf-439b-977c-68deb7afd552">
+
 
 **Nav**
 <img width="1706" alt="nav_1129" src="https://github.com/user-attachments/assets/e7cca380-7241-44b7-bf59-2dffe2f94047">
