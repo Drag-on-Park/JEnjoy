@@ -1,6 +1,82 @@
 {% extends 'base.html' %}
 
+{% block extra_style %}
+<style>
+    #search-form{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: #0B5CD5 1px solid;
+        margin: 60px auto;
+        width: 650px;
+        height: 50px;
+    }
+    .search_input{
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-size: 18px;
+        padding: 4px;
+        color:#0B5CD5;
+        width: 100%;
+    }
+    #search-button{
+        font-size: 36px;
+        border: none;
+        color: #0B5CD5;
+        background-color: transparent;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<h1>Dictionary</h1>
+<div class="container">
+     <!-- 검색 폼 -->
+     <form id="search-form" action="#" method="post">
+        {% csrf_token %}
+
+        <input class="search_input" type="text" placeholder="Search">
+        <button id="search-button" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+    <h2>하루 하나
+        
+    <!-- 1. 최근 검색한 단어 (Recently Searched Words)
+    사용자들이 가장 최근에 검색한 단어를 자동으로 기록하고 표시합니다.
+    사용자가 검색 기록을 클릭하면 해당 단어의 정의 페이지로 이동합니다.
+    이 기능은 사용자 경험을 개선하며, 필요한 정보를 빠르게 찾을 수 있도록 도와줍니다.
+    <br>
+    2. 인기 검색어 (Trending Words)
+    다른 사용자들이 자주 검색하는 인기 검색어 목록을 표시합니다.
+    특정 기간 동안 많이 검색된 단어들을 그래프나 리스트 형태로 나타낼 수 있습니다.
+    사용자들의 관심사를 반영하며, 유머나 트렌드를 반영할 수도 있습니다.
+    <br>
+    3. 추천 단어 섹션 (Word of the Day)
+    매일 하나의 추천 단어를 소개합니다.
+    단어의 뜻, 예문, 발음 등 다양한 정보를 제공하여 학습 효과를 높입니다.
+    사용자가 매일 새로운 단어를 배우도록 유도합니다.
+    <br>
+    4. 카테고리별 검색 추천 (Category-Based Search)
+    특정 카테고리로 나누어 검색 추천 기능을 제공합니다.
+    예: 음식, 여행, 스포츠, 기술 등 다양한 분야의 단어 추천 섹션
+    사용자가 관심 카테고리를 선택하면 관련 단어가 자동으로 표시됩니다.
+    <br>
+    5. 최근 활동 타임라인 (User Activity Timeline)
+    사용자의 활동 기록, 즉 검색 이력 타임라인을 제공해보세요.
+    검색한 단어, 검색 날짜와 시간을 한눈에 볼 수 있도록 구성합니다.
+    <br>
+    6. 상호작용 기능 (User Interaction Features)
+    즐겨찾기 버튼: 사용자가 자주 찾는 단어를 ‘즐겨찾기’에 추가할 수 있도록 기능 추가.
+    퀴즈/테스트 기능: 사용자 참여형 테스트를 만들어 단어의 의미나 철자를 맞추게 합니다.
+    댓글 시스템: 다른 사용자들이 단어에 대해 설명이나 예문을 댓글로 공유할 수 있도록.
+    <br>
+    7. AI 추천 기능 (AI-Powered Suggestions)
+    검색 기록과 추천 알고리즘을 기반으로 AI가 사용자에게 맞춤형 단어 추천 제공.
+    비슷한 단어, 동의어, 반의어 등 다양한 연결성을 추천합니다. -->
+    </h2>
+    
+</div>
+
 
 {% endblock %}
