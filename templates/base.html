@@ -65,9 +65,9 @@
                 </li>
             </ul>
 
-            <div class="user_icon">
-                <a href=""><i class="fa-solid fa-flag-checkered"></i></a>
-                <a href=""><i class="fa-solid fa-user"></i></a>
+            <div class="user_section">
+                <a href=""><i class="fa-solid fa-flag-checkered mission"></i></a>
+                <a href=""><i class="fa-solid fa-user user"></i></a>
                 <!-- 햄버거 버튼 -->
                 <button class="hamburger_menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa-solid fa-bars"></i>
@@ -78,10 +78,40 @@
         <!--!!-->
     </nav>   
     
+
     {% endblock %}
 
     <!-- content section -->
     {% block content %}{% endblock %}
+    <footer class="footer bg-dark text-light py-4">
+        <div class="container d-flex justify-content-between">
+            <div>
+                
+                <p>Contact: <a href="mailto:support@jenjoy.com">gord23p@gmail.com</a></p>
+                <a href="/privacy-policy/" class="text-light">Privacy Policy</a> 
+                <a href="/terms-of-service/" class="text-light">Terms of Service</a>
+                <br>
+                <br>
+                <h5>Follow Us</h5>
+                <a href="#" class="text-light"><i class="fa-brands fa-instagram"></i></a>
+                
+            </div>
+            <div class="footer_logo">
+                <a href="/"><img src="{% static 'images/Egg.png' %}" alt=""></a>
+                <p>© 2024 JENJOY. All Rights Reserved.</p>
+            </div>
+            <div>
+                <h5>오늘의 목표를 달성했나요?</h5>
+                <ul>
+                    <li><a href="/speak/" class="text-light">Speak</a></li>
+                    <li><a href="/jenmon/" class="text-light">Jenmon</a></li>
+                    <li><a href="/dictionary/" class="text-light">Dictionary</a></li>
+                </ul>
+                
+            </div>
+        
+        </div>
+    </footer>
     
 </body>
 </html>

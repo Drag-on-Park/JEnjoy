@@ -26,3 +26,16 @@ v 0.0.0
     - 실시간 순위
 
     - Daily Challenges
+
+# Source
+## **Images**
+https://www.figma.com/community/file/1093160816660454395/220-lively-doodling-illustrations-manila-vector-illustrations-set-svg-png
+https://www.figma.com/community/file/883778082594341562/free-75-illustrations-surface-pack
+https://www.figma.com/community/file/1012332624512867414/eggradients-gradient-collection
+
+## **dictionary**
+네이버 사전 
+GPT 
+https://gaigokugo.tistory.com/
+
+

@@ -69,7 +69,7 @@
         color: #0B5CD5;
     }
 
-    .user_icon {
+    .user_section {
         display: flex; /* !! */
         font-size: 24px;
         position: absolute; /* !! */
@@ -78,6 +78,22 @@
         transform: translateY(-50%); /* !! */
 
     }
+    .user_section .mission, .user {
+        padding: 0 4px;
+    }
+
+    nav .hamburger_menu {
+        padding: 0 4px;
+        outline: none;
+        border: none;
+        background: none;
+        color: #0B5CD5;
+
+    }
+    nav .hamburger_menu:hover {
+        color: #003A99;
+    }
+
 
     .home_banner {
         background-image: url("{% static 'images/Jenjoy_Home.png' %}");
@@ -98,7 +114,7 @@
         justify-content: space-between;
         align-items: center;
         border-bottom: #0B5CD5 1px solid;
-        margin: 60px auto;
+        margin: 70px auto;
         width: 280px;
         height: 50px;
     }
@@ -159,12 +175,28 @@
             justify-content: center; /* !! */
         }
 
-        .user_icon {
+        .user_section {
             /* display: flex; */ /* !! */
             margin-left: auto;
             position: static; /* !! */
             transform: none; /* !! */
         }
+        .user_section .mission, .user {
+            padding: 0 4px;
+        }
+
+        nav .hamburger_menu {
+            padding: 0 4px;
+            outline: none;
+            border: none;
+            background: none;
+            color: #0B5CD5;
+
+        }
+        nav .hamburger_menu:hover {
+            color: #003A99;
+        }
+
     }
     
 
@@ -205,9 +237,9 @@
             </ul>
         </div>
 
-        <div class="user_icon">
-            <a href=""><i class="fa-solid fa-flag-checkered"></i></a>
-            <a href=""><i class="fa-solid fa-user"></i></a>
+        <div class="user_section">
+            <a href=""><i class="fa-solid fa-flag-checkered mission"></i></a>
+            <a href=""><i class="fa-solid fa-user user"></i></a>
             <!-- 햄버거 버튼 -->
             <button class="hamburger_menu" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
