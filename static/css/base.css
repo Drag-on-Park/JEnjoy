@@ -65,10 +65,10 @@ li {
     z-index: 1; 
 }
 
-.user_section {
+.section_user {
     font-size: 24px;
 }
-.user_section .mission, .user {
+.section_user .mission, .user {
     padding: 0 4px;
 }
 
@@ -95,7 +95,7 @@ footer .container ul{
     text-align: center; 
 }
 
-footer .footer_logo img{
+footer .footer_logo img {
     margin-bottom: 8px;
 
 }

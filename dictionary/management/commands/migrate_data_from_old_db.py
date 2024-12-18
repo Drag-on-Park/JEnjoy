@@ -1,3 +1,4 @@
+# DB파일 dump
 from django.core.management.base import BaseCommand
 from dictionary.models import Dictionary
 import sqlite3
