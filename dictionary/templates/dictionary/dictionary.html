@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block extra_style %}
 <style>
     #search-form{
@@ -26,21 +26,420 @@
         color: #0B5CD5;
         background-color: transparent;
     }
+
+    .section_title {
+        margin: 24px 0;
+    }
+
+    .section_content {
+        display: flex;
+        margin-bottom: 48px;
+    }
+
+    .card_group {
+        margin: 0 24px;
+
+    }
+
+    .card {
+        align-items: center;
+        border-radius: 16px;
+        /* background-color: #5B60FD; */
+    }
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card-title{
+        align-items: center;
+    }
+
+    .level {
+        margin-left: auto;
+        margin-right: 24px;
+        margin-top: 12px;
+    }
+
+    .one_word {
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        color: black;
+    }
+    .word, .blank_word {
+        margin: 0 6px;
+    }
+    .blank_word {
+        background-color: #E1F0FF;
+        border-radius: 10px;
+        align-items: center;
+        height: 32px;
+    }
+
+    .pos {
+        color: #3D9CFB;
+        margin-right: 12px;
+    }
+
+    .card_answer {
+        margin-bottom: 12px;
+        border-bottom: #0B5CD5 1px solid;
+
+    }
+
+    .card_answer input{
+        border: none;
+        outline: none;
+    }
+
+    .answer_submit {
+        outline: none;
+        border: none;
+        background-color: #fff;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .answer_submit:hover {
+        transform: scale(1.07); 
+        background-color: transparent;
+    }
+
+
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        margin: 20px 0;
+        border-spacing: 1rem;
+    }
+
+    
+
+    table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    table td {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+    }
+
+    /* 체크판 스타일 */
+    table tr:nth-child(odd) td:nth-child(even),
+    table tr:nth-child(even) td:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    table tr:nth-child(odd) td:nth-child(odd),
+    table tr:nth-child(even) td:nth-child(even) {
+        background-color: #fff;
+    }
+
+
+    .crossword-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table.crossword {
+        border-collapse: separate;
+
+    }
+
+    table.crossword td {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #ccc;
+        position: relative;
+        text-align: center;
+    }
+
+    table.crossword .input-cell input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        text-align: center;
+        font-size: 18px;
+        text-transform: uppercase;
+        outline: none;
+        background-color: #fff;
+    }
+
+    table.crossword td .number {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        font-size: 12px;
+        color: #333;
+    }
+    .content_hvkey {
+        margin-left: 24px;
+    }
+    
+    .key_horizontal, .key_vertical {
+        border: none;
+        background: transparent;
+        
+    }
+    .key_horizontal {
+        border-bottom: 2px solid #0B5CD5 ;
+    }
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-     <!-- 검색 폼 -->
-     <form id="search-form" action="#" method="post">
-        {% csrf_token %}
+    <div class="section_search">
+        <!-- 검색 폼 -->
+        <form id="search-form" action="#" method="post">
+            {% csrf_token %}
 
-        <input class="search_input" type="text" placeholder="Search">
-        <button id="search-button" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-    </form>
-    <h2>하루 하나
+            <input class="search_input" type="text" placeholder="Search">
+            <button id="search-button" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>  
+    <div class="section_oneword">
+        <div class="section_title">
+            <h2>하루 한 단어</h2>
+        </div>
+        <div class="section_content">
+            <div class="row row-cols-1 row-cols-md-3 g-4 card_group">
+                <div class="col">
+                  <div class="card">
+                    <div class="level">N5</div>
+                    <a class="one_word" href="" >
+                        <!-- 答える -->
+
+                        <span class="word">
+                            答
+                        </span>
+                        <span class="blank_word">
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                        </span>
+                        <span class="word">
+                            る
+                        </span>
+                        
+                    </a>
+                    <div class="card-body ">
+                        <h5 class="card-title"><span class="pos">[동사(動詞)]</span>식욕, 먹고 싶어 하는 욕망 대답하다.</h5>
+                        <div class="example">
+                            <p class="card-text">彼はいつも率直に答__るタイプだ。</p>
+                            <span>질문에 대답하다.</span>
+                        </div>
+                    </div>
+                    <div class="card_answer">
+                        <form class="answer_form" action="">
+                            <input class="answer_search" type="text" placeholder="Answer">
+                            <button class="answer_submit">
+                                <img src="{% static 'images/Enter_icon.png' %}" alt="">
+                            </button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <div class="level">N5</div>
+                    <a class="one_word" href="" >
+                        <!-- 答える -->
+
+                        <span class="word">
+                            答
+                        </span>
+                        <span class="blank_word">
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                        </span>
+                        <span class="word">
+                            る
+                        </span>
+                        
+                    </a>
+                    <div class="card-body ">
+                        <h5 class="card-title"><span class="pos">[동사(動詞)]</span>식욕, 먹고 싶어 하는 욕망 대답하다.</h5>
+                        <div class="example">
+                            <p class="card-text">彼はいつも率直に答__るタイプだ。</p>
+                            <span>질문에 대답하다.</span>
+                        </div>
+                    </div>
+                    <div class="card_answer">
+                        <form class="answer_form" action="">
+                            <input class="answer_search" type="text" placeholder="Answer">
+                            <button class="answer_submit">
+                                <img src="{% static 'images/Enter_icon.png' %}" alt="">
+                            </button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <div class="level">N5</div>
+                    <a class="one_word" href="" >
+                        <!-- 答える -->
+
+                        <span class="word">
+                            答
+                        </span>
+                        <span class="blank_word">
+                            &nbsp;
+                            &nbsp;
+                            &nbsp;
+                        </span>
+                        <span class="word">
+                            る
+                        </span>
+                        
+                    </a>
+                    <div class="card-body ">
+                        <h5 class="card-title"><span class="pos">[동사(動詞)]</span>식욕, 먹고 싶어 하는 욕망 대답하다.</h5>
+                        <div class="example">
+                            <p class="card-text">彼はいつも率直に答__るタイプだ。</p>
+                            <span>질문에 대답하다.</span>
+                        </div>
+                    </div>
+                    <div class="card_answer">
+                        <form class="answer_form" action="">
+                            <input class="answer_search" type="text" placeholder="Answer">
+                            <button class="answer_submit">
+                                <img src="{% static 'images/Enter_icon.png' %}" alt="">
+                            </button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+
+
+                
+            </div>
+
+        </div>
+
+    </div>
+    <div class="section_hvquiz">
+        <div class="section_title">
+            <h2>가로세로 퀴즈</h2>
+            <h3>매일 12시 업데이트</h3>
+        </div>
+        <div class="section_content">
+            <div class="content_hvtable">
+                <table>
+                    <tr>
+                        <td>答</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class="content_hvkey">
+                <div class="tab_list">
+                    <button class="key_horizontal">가로</button>
+                    <button class="key_vertical">세로</button>
+                </div>
+                <div class="tab_content">
+                    1. JLPT N5 단어. **'대답하다'**를 의미하는 동사입니다. 반대말: 無視する (무시하다)
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="section_kana">
+        <div class="section_title">
+            <h2>히라가나</h2>
+            <div class="crossword-container">
+                <table class="crossword">
+                    <!-- 1행 -->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- 2행 -->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- 3행 -->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <h2>일본어의 기원</h2>
+        </div>
+        <div class="section_content">
+
+        </div>
+
+    </div>
+
+    <h2>
         
     <!-- 1. 최근 검색한 단어 (Recently Searched Words)
     사용자들이 가장 최근에 검색한 단어를 자동으로 기록하고 표시합니다.
@@ -76,6 +475,7 @@
     비슷한 단어, 동의어, 반의어 등 다양한 연결성을 추천합니다. -->
     </h2>
     
+
 </div>
 
 
