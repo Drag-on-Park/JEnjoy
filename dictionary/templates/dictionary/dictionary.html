@@ -2,6 +2,9 @@
 {% load static %}
 {% block extra_style %}
 <style>
+    td, th {
+        white-space: nowrap; /* 줄바꿈 방지 */
+    }
     #search-form{
         display: flex;
         justify-content: space-between;
@@ -28,11 +31,12 @@
     }
 
     .section_title {
-        margin: 24px 0;
+        margin: 12px 0;
     }
 
     .section_content {
         display: flex;
+        margin: 0 24px;
         margin-bottom: 48px;
     }
 
@@ -108,39 +112,33 @@
         background-color: transparent;
     }
 
-
-
-    table {
+    .hvquiz {
         width: 100%;
-        border-collapse: separate;
         margin: 20px 0;
         border-spacing: 1rem;
-    }
+    }    
 
-    
-
-    table tr:hover {
+    .hvquiz tr:hover {
         background-color: #f1f1f1;
     }
 
-    table td {
+    .hvquiz td {
         width: 50px;
         height: 50px;
         text-align: center;
-        border: 1px solid #ddd;
         border-radius: 8px;
         box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
         background-color: #fff;
     }
 
     /* 체크판 스타일 */
-    table tr:nth-child(odd) td:nth-child(even),
-    table tr:nth-child(even) td:nth-child(odd) {
+    .hvquiz tr:nth-child(odd) td:nth-child(even),
+    .hvquiz tr:nth-child(even) td:nth-child(odd) {
         background-color: #f9f9f9;
     }
 
-    table tr:nth-child(odd) td:nth-child(odd),
-    table tr:nth-child(even) td:nth-child(even) {
+    .hvquiz tr:nth-child(odd) td:nth-child(odd),
+    .hvquiz tr:nth-child(even) td:nth-child(even) {
         background-color: #fff;
     }
 
@@ -182,18 +180,165 @@
         font-size: 12px;
         color: #333;
     }
+
     .content_hvkey {
         margin-left: 24px;
     }
-    
-    .key_horizontal, .key_vertical {
+
+    .key_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .key {
+        font-size: 2rem;
         border: none;
         background: transparent;
-        
+        padding: 5px 10px;
+        position: relative;
+        cursor: pointer;
     }
-    .key_horizontal {
-        border-bottom: 2px solid #0B5CD5 ;
+
+    .key::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #0B5CD5;
+        opacity: 0;
+        transition: opacity 0.5s ease;
     }
+
+    .key.active::after,
+    .key:hover::after {
+        opacity: 1;
+    }
+
+    .kana_container {
+        margin: 0 24px;
+        margin-bottom: 48px;
+    }
+    .kana_fcol {
+        background-color: #f9f9f9;
+
+    }
+
+    .kana_head{
+        margin-bottom: 24px;
+    }
+
+    .kana_table_wrapper {
+        display: flex;
+        margin: 36px 0;
+    }
+
+    .hiragana_50, .katakana_50 {
+        width: 600px;
+        border-collapse: collapse;
+        text-align: center;
+        border-spacing: 1px;
+        /* margin: auto; */
+    }
+    .hiragana_50 {
+        margin-right: 24px;
+    }
+
+    .hiragana_50 thead {
+        background-color: #3D9CFB;
+        color: #fff;
+    }
+
+    .hiragana_50 td, th{   
+        border: 1px solid black;
+        padding: 5px 8px;
+
+    }
+
+    .katakana_50 thead {
+        background-color: #FF565E;
+        color: #fff;
+    }
+
+    .katakana_50 td, th {   
+        border: 1px solid black;
+        padding: 5px 8px;
+    }
+
+    .dakuten_yoon_wrapper {
+        display: flex;
+        margin: 20px 0;
+    }
+
+    .yoon, .dakuten_hadakuten {
+        border-collapse: collapse;
+        text-align: center;
+        border-spacing: 1px;
+        margin: 0 auto;
+    }  
+    .yoon {
+        display: flex;
+        margin-right: 24px;
+    }
+    
+    .h_yoon {
+        background-color: #3D9CFB;
+        color: #fff;
+    }
+
+    .k_yoon {
+        background-color: #FF565E;
+        color: #fff;
+
+    }
+
+    .head_yoon {
+        background-color: #5B60FD;
+        color: #fff;;
+    }
+    
+    .yoon td, th {
+        border: 1px solid black;
+        padding: 5px 8px;
+    }
+
+
+    .head_dakuhadakuten {
+        background-color: #FFB61D;
+        color: #fff;
+    }
+
+    .dakuhadakuten_caption {
+        background: linear-gradient(to right, #3D9CFB, #FF565E);
+        color: white;
+    }
+
+    .dakuten_hadakuten td:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .c_hdakuhadakuten {
+        background-color: #3D9CFB !important;
+        color: #fff;
+    }
+
+    .c_kdakuhadakuten {
+        background-color: #FF565E !important;
+        color: #fff;
+    }
+
+    .dakuten_hadakuten td, th {
+        border: 1px solid black;
+        padding: 5px 8px;
+    }
+
+    .dakuten_hadakuten p {
+        margin: 0;
+    }
+
 
 </style>
 {% endblock %}
@@ -340,7 +485,7 @@
         </div>
         <div class="section_content">
             <div class="content_hvtable">
-                <table>
+                <table class="hvquiz">
                     <tr>
                         <td>答</td>
                         <td>&nbsp;</td>
@@ -348,8 +493,6 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                    </tr>
-                    <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -364,8 +507,6 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                    </tr>
-                    <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -374,6 +515,138 @@
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -383,14 +656,16 @@
                     </tr>
                     
                 </table>
+                
             </div>
             <div class="content_hvkey">
-                <div class="tab_list">
-                    <button class="key_horizontal">가로</button>
-                    <button class="key_vertical">세로</button>
+                <div class="key_container">
+                    <button id="key_horizontal" class="key active">가로</button>
+                    <button id="key_vertical" class="key">세로</button>
                 </div>
-                <div class="tab_content">
-                    1. JLPT N5 단어. **'대답하다'**를 의미하는 동사입니다. 반대말: 無視する (무시하다)
+                <div class="key_content">
+                    <p>1. JLPT N5 단어. **'대답하다'**를 의미하는 동사입니다. 반대말: 無視する (무시하다)</p> 
+                    <p>2. 매일 랜덤퀴즈, 자동화 </p>
 
                 </div>
                 
@@ -399,45 +674,342 @@
     </div>
     <div class="section_kana">
         <div class="section_title">
-            <h2>히라가나</h2>
-            <div class="crossword-container">
-                <table class="crossword">
-                    <!-- 1행 -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- 2행 -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- 3행 -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <h2 class="kana_head">카나(히라가나 + 가타카나)</h2>
+        </div>
+        <div class="kana_container">
+            <div class="kana_table_wrapper">
+                <table class="hiragana_50">
+                    <thead>
+                        <tr>
+                            <th>히라가나 50음도표 </th>
+                            <th>あ단</th>
+                            <th>い단</th>
+                            <th>う단</th>
+                            <th>え단</th>
+                            <th>お단</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="kana_fcol">あ행</td>
+                            <td>あ(a, 아)</td>
+                            <td>い(i, 이)</td>
+                            <td>う(u, 우)</td>
+                            <td>え(e, 에)</td>
+                            <td>お(o, 오)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">か행</td>
+                            <td>か(ka, 카)</td>
+                            <td>き(ki, 키)</td>
+                            <td>く(ku, 쿠)</td>
+                            <td>け(ke, 케)</td>
+                            <td>こ(ko, 코)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">さ행</td>
+                            <td>さ(sa, 사)</td>
+                            <td>し(shi, 시)</td>
+                            <td>す(su, 수)</td>
+                            <td>せ(se, 세)</td>
+                            <td>そ(so, 소)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">た행</td>
+                            <td>た(ta, 타)</td>
+                            <td>ち(chi, 치)</td>
+                            <td>つ(tsu, 츠)</td>
+                            <td>て(te, 테)</td>
+                            <td>と(to, 토)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">な행</td>
+                            <td>な(na, 나)</td>
+                            <td>に(ni, 니)</td>
+                            <td>ぬ(nu, 누)</td>
+                            <td>ね(ne, 네)</td>
+                            <td>の(no, 노)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">は행</td>
+                            <td>は(ha, 하)</td>
+                            <td>ひ(hi, 히)</td>
+                            <td>ふ(fu, 후)</td>
+                            <td>へ(he, 헤)</td>
+                            <td>ほ(ho, 호)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ま행</td>
+                            <td>ま(/ma, 마)</td>
+                            <td>み(/mi, 미)</td>
+                            <td>む(/mu, 무)</td>
+                            <td>め(/me, 메)</td>
+                            <td>も(/mo, 모)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">や행</td>
+                            <td>や(ya, 야)</td>
+                            <td></td>
+                            <td>ゆ(yu, 유)</td>
+                            <td></td>
+                            <td>よ(yo, 요)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ら행</td>
+                            <td>ら(ra, 라)</td>
+                            <td>り(ri, 리)</td>
+                            <td>る(ru, 루)</td>
+                            <td>れ(re, 레)</td>
+                            <td>ろ(ro, 로)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">わ행</td>
+                            <td>わ(wa, 와)</td>
+                            <td>ゐ(wi, 이)</td>
+                            <td></td>
+                            <td>ゑ(we, 에)</td>
+                            <td>を(o, 오)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ん</td>
+                            <td>ん(N, 응)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <table class="katakana_50">
+                    <thead>
+                        <tr>
+                            <th>가타카나 50음도표</th>
+                            <th>ア단</th>
+                            <th>イ단</th>
+                            <th>ウ단</th>
+                            <th>エ단</th>
+                            <th>オ단</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="kana_fcol">ア행</td>
+                            <td>ア(a, 아)</td>
+                            <td>イ(i, 이)</td>
+                            <td>ウ(u, 우)</td>
+                            <td>エ(e, 에)</td>
+                            <td>オ(o, 오)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">カ행</td>
+                            <td>カ(ka, 카)</td>
+                            <td>キ(ki, 키)</td>
+                            <td>ク(ku, 쿠)</td>
+                            <td>ケ(ke, 케)</td>
+                            <td>コ(ko, 코)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">サ행</td>
+                            <td >サ(sa, 사)</td>
+                            <td>シ(shi, 시)</td>
+                            <td>ス(su, 수)</td>
+                            <td>セ(se, 세)</td>
+                            <td>ソ(so, 소)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">タ행</td>
+                            <td>タ(ta, 타)</td>
+                            <td>チ(chi, 치)</td>
+                            <td>ツ(tsu, 츠)</td>
+                            <td>テ(te, 테)</td>
+                            <td>ト(to, 토)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ナ행</td>
+                            <td>ナ(na, 나)</td>
+                            <td>ニ(ni, 니)</td>
+                            <td>ヌ(nu, 누)</td>
+                            <td>ネ(ne, 네)</td>
+                            <td>ノ(no, 노)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ハ행</td>
+                            <td>ハ(ha, 하)</td>
+                            <td>ヒ(hi, 히)</td>
+                            <td>フ(fu, 후)</td>
+                            <td>ヘ(he, 헤)</td>
+                            <td>ホ(ho, 호)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">マ행</td>
+                            <td>マ(ma, 마)</td>
+                            <td>ミ(mi, 미)</td>
+                            <td>ム(mu, 무)</td>
+                            <td>メ(me, 메)</td>
+                            <td>モ(mo, 모)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ヤ행</td>
+                            <td>ヤ(ya, 야)</td>
+                            <td></td>
+                            <td>ユ(yu, 유)</td>
+                            <td></td>
+                            <td>ヨ(yo, 요)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ラ행</td>
+                            <td>ラ(ra, 라)</td>
+                            <td>リ(ri, 리)</td>
+                            <td>ル(ru, 루)</td>
+                            <td>レ(re, 레)</td>
+                            <td>ロ(ro, 로)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ワ행</td>
+                            <td>ワ(wa, 와)</td>
+                            <td>ヰ(wi, 이)</td>
+                            <td></td>
+                            <td>ヱ(we, 에)</td>
+                            <td>ヲ(o, 오)</td>
+                        </tr>
+                        <tr>
+                            <td class="kana_fcol">ン</td>
+                            <td>ン(N, 응)</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
-            <h2>일본어의 기원</h2>
+            <div class="dakuten_yoon_wrapper">
+                <table class="yoon">
+                        <tr class="caption">
+                            <th class="h_yoon" colspan="4">히라가나</th>
+                            <th class="k_yoon" colspan="4">가타카나</th>
+                        </tr>
+                        <tr class="thead">
+                            <th class="head_yoon" colspan="3">요음</th>
+                            <th class="head_sokuon">촉음</th>
+                            <th class="head_yoon" colspan="3">요음</th>
+                            <th class="head_sokuon">촉음</th>
+                        </tr>
+                        <tr>
+                            <!-- 요음 -->
+                            <td>ゃ</td>
+                            <td>ゅ</td>
+                            <td>ょ</td>
+                            <!-- 촉음 -->
+                            <td>っ</td>
+                            <!-- 가타카나 요음 -->
+                            <td>ャ</td>
+                            <td>ュ</td>
+                            <td>ョ</td>
+                            <!-- 가타카나 촉음 -->
+                            <td>ッ</td>
+                        </tr>
+                </table>
+
+                <table class="dakuten_hadakuten">
+                    <tr>
+                        <th class="head_dakuhadakuten" colspan="12">탁음·반탁음</th>
+                    </tr>
+                    <tr>
+                        <td class="dakuhadakuten_caption" colspan="2"><p>히라가나 /</p><p> 가타카나&nbsp;&nbsp;</p></td>
+                        <td class="c_hdakuhadakuten">が행</td>
+                        <td class="c_kdakuhadakuten">ガ행</td>
+                        <td class="c_hdakuhadakuten">ざ행</td>
+                        <td class="c_kdakuhadakuten">ザ행</td>
+                        <td class="c_hdakuhadakuten">だ행</td>
+                        <td class="c_kdakuhadakuten">ダ행</td>
+                        <td class="c_hdakuhadakuten">ば행</td>
+                        <td class="c_kdakuhadakuten">バ행</td>
+                        <td class="c_hdakuhadakuten">ぱ행</td>
+                        <td class="c_kdakuhadakuten">パ행</td>
+                    </tr>
+                    <tr>
+                        <td class="c_hdakuhadakuten">あ단</td>
+                        <td class="c_kdakuhadakuten">ア단</td>
+                        <td>が(ga, 가)</td>
+                        <td>ガ(ga, 가)</td>
+                        <td>ざ(za, 자)</td>
+                        <td>ザ(za, 자)</td>
+                        <td>だ(da, 다)</td>
+                        <td>ダ(da, 다)</td>
+                        <td>ば(ba, 바)</td>
+                        <td>バ(ba, 바)</td>
+                        <td>ぱ(pa, 파)</td>
+                        <td>パ(pa, 파)</td>
+                    </tr>
+                    <tr>
+                        <td class="c_hdakuhadakuten">い단</td>
+                        <td class="c_kdakuhadakuten">イ단</td>
+                        <td>ぎ(gi, 기)</td>
+                        <td>ギ(gi, 기)</td>
+                        <td>じ(ji, 지)</td>
+                        <td>ジ(ji, 지)</td>
+                        <td>ぢ(ji, 지)</td>
+                        <td>ヂ(ji, 지)</td>
+                        <td>び(bi, 비)</td>
+                        <td>ビ(bi, 비)</td>
+                        <td>ぴ(pi, 피)</td>
+                        <td>ピ(pi, 피)</td>
+                    </tr>
+                    <tr>
+                        <td class="c_hdakuhadakuten">う단</td>
+                        <td class="c_kdakuhadakuten">ウ단</td>
+                        <td>ぐ(gu, 구)</td>
+                        <td>グ(gu, 구)</td>
+                        <td>ず(zu, 주)</td>
+                        <td>ズ(zu, 주)</td>
+                        <td>づ(zu, 주)</td>
+                        <td>ヅ(zu, 주)</td>
+                        <td>ぶ(bu, 부)</td>
+                        <td>ブ(bu, 부)</td>
+                        <td>ぷ(pu, 푸)</td>
+                        <td>プ(pu, 푸)</td>
+                    </tr>
+                    <tr>
+                        <td class="c_hdakuhadakuten">え단</td>
+                        <td class="c_kdakuhadakuten">エ단</td>
+                        <td>げ(ge, 게)</td>
+                        <td>ゲ(ge, 게)</td>
+                        <td>ぜ(ze, 제)</td>
+                        <td>ゼ(ze, 제)</td>
+                        <td>で(de, 데)</td>
+                        <td>デ(de, 데)</td>
+                        <td>べ(be, 베)</td>
+                        <td>ベ(be, 베)</td>
+                        <td>ぺ(pe, 페)</td>
+                        <td>ペ(pe, 페)</td>
+                    </tr>
+                    <tr>
+                        <td class="c_hdakuhadakuten">お단</td>
+                        <td class="c_kdakuhadakuten">オ단</td>
+                        <td>ご(go, 고)</td>
+                        <td>ゴ(go, 고)</td>
+                        <td>ぞ(zo, 조)</td>
+                        <td>ゾ(zo, 조)</td>
+                        <td>ど(do, 도)</td>
+                        <td>ド(do, 도)</td>
+                        <td>ぼ(bo, 보)</td>
+                        <td>ボ(bo, 보)</td>
+                        <td>ぽ(po, 포)</td>
+                        <td>ポ(po, 포)</td>
+                    </tr>
+                </table>
+                
+            </div>
         </div>
+            
         <div class="section_content">
 
         </div>
 
     </div>
+    <h2>일본어의 기원</h2>
 
     <h2>
         
@@ -478,5 +1050,20 @@
 
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".key");
+
+  buttons.forEach((button) => {
+    button.addEventListener("mouseenter", () => {
+      buttons.forEach((btn) => btn.classList.remove("active")); // 기존 active 클래스 제거
+      button.classList.add("active"); // 현재 버튼에 active 클래스 추가
+    });
+  });
+});
+
+</script>
+
 
 {% endblock %}
+
