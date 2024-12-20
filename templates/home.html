@@ -256,10 +256,10 @@
     <div class="home_banner">
         
         <!-- 검색 폼 -->
-        <form id="search-form" action="#" method="post">
+        <form id="search-form" action="{% url 'dictionary:dictionary_search' %}" method="post">
             {% csrf_token %}
 
-            <input class="search_input" type="text" placeholder="Search">
+            <input class="search_input" type="text" name='search_query' placeholder="Search">
             <button id="search-button" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>

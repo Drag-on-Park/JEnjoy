@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ search_word }}{% endblock %}
+
+{% block extra_style %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section_search">
+        <!-- 검색 폼 -->
+        <form id="search-form" action="#" method="post">
+            {% csrf_token %}
+
+            <input class="search_input" type="text" placeholder="Search">
+            <button id="search-button" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div> 
+</div>
+
+{% for one in search_result %}
+{{one.word}}
+{{one.pronunciation}}
+{{one.meaning}}
+{{one.POS}}
+{{one.Lv}}
+<br>
+{% endfor %}
+
+{% endblock %}
