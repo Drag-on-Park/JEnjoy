@@ -34,9 +34,14 @@ https://www.figma.com/community/file/1093160816660454395/220-lively-doodling-ill
 https://www.figma.com/community/file/883778082594341562/free-75-illustrations-surface-pack
 https://www.figma.com/community/file/1012332624512867414/eggradients-gradient-collection
 
-## **dictionary**
+## **Dictionary**
 네이버 사전 
 GPT 
 https://gaigokugo.tistory.com/
+
+## **Kana**
+https://namu.wiki/w/%EA%B0%80%ED%83%80%EC%B9%B4%EB%82%98
+https://namu.wiki/w/%ED%9E%88%EB%9D%BC%EA%B0%80%EB%82%98
+https://blog.naver.com/jewel12200/222172887463
 
 
