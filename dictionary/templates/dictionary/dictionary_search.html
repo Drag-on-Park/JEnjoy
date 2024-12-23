@@ -10,24 +10,31 @@
 <div class="container">
     <div class="section_search">
         <!-- 검색 폼 -->
-        <form id="search-form" action="#" method="post">
+        <form id="search-form" action="{% url 'dictionary:dictionary_search' %}" method="post">
             {% csrf_token %}
 
-            <input class="search_input" type="text" placeholder="Search">
+            <input class="search_input" type="text" name="search_query" placeholder="Search">
             <button id="search-button" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
     </div> 
+
+    <!-- 검색결과 -->
+    <!-- 결과 쿼리가 있을 때 -->
+    {% for one in search_result %}
+    {{one.word}}
+    {{one.pronunciation}}
+    {{one.meaning}}
+    {{one.POS}}
+    {{one.Lv}}
+    <br>
+    {% endfor %}
+     
+    <!-- 결과 쿼리가 없을 때 -->
+     <!--  -->
 </div>
 
-{% for one in search_result %}
-{{one.word}}
-{{one.pronunciation}}
-{{one.meaning}}
-{{one.POS}}
-{{one.Lv}}
-<br>
-{% endfor %}
+
 
 {% endblock %}

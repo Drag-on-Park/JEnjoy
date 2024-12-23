@@ -11,7 +11,42 @@ class Dictionary(models.Model):
         ('1', 'N1'), ('2', 'N2'), ('3', 'N3'), ('4', 'N4'), ('5', 'N5')
     ])
     views = models.IntegerField(default=0)
+    
 
     def __str__(self):
         return self.word
 
+# today_word
+# 날짜
+# 단어 - 외래키
+# 레벨별 
+
+# 단어선택 기준
+# 블랭크 기준
+# 사전에 단어가 삭제 됐을 때  연쇄 삭제? 남겨놓는가 
+# 삭제 된다면 다른 단어로 대체 
+# 스냅샷 
+# blank_word 추가예정
+class TodayWord(models.Model):
+    date = models.DateField(auto_now_add=True)
+    
+    dictionary = models.ForeignKey(Dictionary, on_delete=models.SET_NULL, null=True)
+    today_word = models.CharField(max_length=100)
+    today_pronunciation = models.CharField(max_length=100, null=True, blank=True)
+    today_meaning = models.TextField(null=True, blank=True)
+    priority = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        if self.dictionary:
+            self.today_word = self.dictionary.word
+            self.pronunciation = self.dictionary.pronunciation
+            self.meaning = self.dictionary.meaning
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.date} - {self.today_word}"
+
+
+
+# example_sentence 사용자 참여 예문
