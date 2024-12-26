@@ -6,7 +6,7 @@ class Dictionary(models.Model):
     pronunciation = models.CharField(max_length=100)
     meaning = models.TextField()  # 단어의 뜻
     audio_path = models.CharField(max_length=255)  # 발음 오디오 경로
-    POS = models.CharField(max_length=50)  # 품사 (Noun, Verb 등)
+    POS = models.CharField(max_length=50)  # 품사
     Lv = models.CharField(max_length=2, choices=[
         ('1', 'N1'), ('2', 'N2'), ('3', 'N3'), ('4', 'N4'), ('5', 'N5')
     ])
@@ -16,9 +16,6 @@ class Dictionary(models.Model):
     def __str__(self):
         return self.word
 
-# today_word
-# 날짜
-# 단어 - 외래키
 # 레벨별 
 
 # 단어선택 기준
@@ -29,19 +26,25 @@ class Dictionary(models.Model):
 # blank_word 추가예정
 class TodayWord(models.Model):
     date = models.DateField(auto_now_add=True)
-    
     dictionary = models.ForeignKey(Dictionary, on_delete=models.SET_NULL, null=True)
     today_word = models.CharField(max_length=100)
     today_pronunciation = models.CharField(max_length=100, null=True, blank=True)
     today_meaning = models.TextField(null=True, blank=True)
+    today_POS = models.CharField(max_length=50, null=True) 
+    today_Lv = models.CharField(max_length=2, choices=[
+        ('1', 'N1'), ('2', 'N2'), ('3', 'N3'), ('4', 'N4'), ('5', 'N5')
+    ], null=True)
     priority = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    blank_word = models.CharField(max_length=50, null=True)
 
     def save(self, *args, **kwargs):
         if self.dictionary:
             self.today_word = self.dictionary.word
-            self.pronunciation = self.dictionary.pronunciation
-            self.meaning = self.dictionary.meaning
+            self.today_pronunciation = self.dictionary.pronunciation
+            self.today_meaning = self.dictionary.meaning
+            self.today_POS = self.dictionary.POS
+            self.today_Lv = self.dictionary.Lv
         super().save(*args, **kwargs)
     
     def __str__(self):

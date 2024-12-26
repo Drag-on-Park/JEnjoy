@@ -352,6 +352,10 @@
     <div class="section_oneword">
         <div class="section_title">
             <h2>하루 한 단어</h2>
+            {% for one in today_words %}
+            {{one.today_word}}
+            {{one.today_pronunciation}}
+            {% endfor %}
         </div>
         <div class="section_content">
             <div class="row row-cols-1 row-cols-md-3 g-4 card_group">
@@ -360,7 +364,7 @@
                     <div class="level">N5</div>
                     <a class="one_word" href="" >
                         <!-- 答える -->
-
+                       
                         <span class="word">
                             答
                         </span>
@@ -375,7 +379,7 @@
                         
                     </a>
                     <div class="card-body ">
-                        <p>こたえる</p>
+                        <p>{{today_word.pronunciation}}</p>
                         <h5 class="card-title"><span class="pos">[동사(動詞)]</span> 대답하다.</h5>
                         <div class="example">
                             <p class="card-text">彼はいつも率直に答__るタイプだ。</p>
