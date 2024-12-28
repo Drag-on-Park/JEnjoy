@@ -352,110 +352,37 @@
     <div class="section_oneword">
         <div class="section_title">
             <h2>하루 한 단어</h2>
-            {% for one in today_words %}
-            {{one.today_word}}
-            {{one.today_pronunciation}}
-            {% endfor %}
+            
+            <form action="" method="post">
+                {% csrf_token %}
+                <button type="submit">today_word생성</button>
+            </form>
+
         </div>
         <div class="section_content">
             <div class="row row-cols-1 row-cols-md-3 g-4 card_group">
+                {% for one in today_words %}
                 <div class="col">
                   <div class="card">
-                    <div class="level">N5</div>
+                    <div class="level">{{one.today_Lv}}</div>
                     <a class="one_word" href="" >
-                        <!-- 答える -->
-                       
-                        <span class="word">
-                            答
-                        </span>
-                        <span class="blank_word">
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                        </span>
-                        <span class="word">
-                            る
-                        </span>
-                        
-                    </a>
-                    <div class="card-body ">
-                        <p>{{today_word.pronunciation}}</p>
-                        <h5 class="card-title"><span class="pos">[동사(動詞)]</span> 대답하다.</h5>
-                        <div class="example">
-                            <p class="card-text">彼はいつも率直に答__るタイプだ。</p>
-                            <span>질문에 대답하다.</span>
-                        </div>
-                    </div>
-                    <div class="card_answer">
-                        <form class="answer_form" action="">
-                            <input class="answer_search" type="text" placeholder="Answer">
-                            <button class="answer_submit">
-                                <img src="{% static 'images/Enter_icon.png' %}" alt="">
-                            </button>
-                        </form>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <div class="level">N5</div>
-                    <a class="one_word" href="" >
-                        <!-- 答える -->
+                        <!-- 단어 -->
+                            {% for char in rendered_words %}
 
-                        <span class="word">
-                            答
-                        </span>
-                        <span class="blank_word">
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                        </span>
-                        <span class="word">
-                            る
-                        </span>
-                        
-                    </a>
-                    <div class="card-body ">
-                        <h5 class="card-title"><span class="pos">[동사(動詞)]</span>식욕, 먹고 싶어 하는 욕망 대답하다.</h5>
-                        <div class="example">
-                            <p class="card-text">彼はいつも率直に答__るタイプだ。</p>
-                            <span>질문에 대답하다.</span>
-                        </div>
-                    </div>
-                    <div class="card_answer">
-                        <form class="answer_form" action="">
-                            <input class="answer_search" type="text" placeholder="Answer">
-                            <button class="answer_submit">
-                                <img src="{% static 'images/Enter_icon.png' %}" alt="">
-                            </button>
-                        </form>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <div class="level">N5</div>
-                    <a class="one_word" href="" >
-                        <!-- 答える -->
+                            {% if char == " " %}
+                                <span class="blank_word">&nbsp;&nbsp;&nbsp;</span>
+                            {% else %}
+                                <span class="word">{{ char }}</span>
+                            {% endif %}
+                            {% endfor %}
 
-                        <span class="word">
-                            答
-                        </span>
-                        <span class="blank_word">
-                            &nbsp;
-                            &nbsp;
-                            &nbsp;
-                        </span>
-                        <span class="word">
-                            る
-                        </span>
-                        
-                    </a>
+                        </a>
                     <div class="card-body ">
-                        <h5 class="card-title"><span class="pos">[동사(動詞)]</span>식욕, 먹고 싶어 하는 욕망 대답하다.</h5>
+                        <p>{{one.today_pronunciation}}</p>
+                        <h5 class="card-title"><span class="pos">[{{one.today_POS}}]</span> {{one.today_meaning}}</h5>
                         <div class="example">
-                            <p class="card-text">彼はいつも率直に答__るタイプだ。</p>
-                            <span>질문에 대답하다.</span>
+                            <p class="card-text">[예문]彼はいつも率直に答__るタイプだ。</p>
+                            <span>[예문 뜻]질문에 대답하다.</span>
                         </div>
                     </div>
                     <div class="card_answer">
@@ -468,6 +395,9 @@
                     </div>
                   </div>
                 </div>
+
+                {% endfor %}
+                
 
 
                 
