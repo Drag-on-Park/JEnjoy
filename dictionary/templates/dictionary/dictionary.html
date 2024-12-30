@@ -83,7 +83,8 @@
         background-color: #E1F0FF;
         border-radius: 10px;
         align-items: center;
-        height: 32px;
+        height: 42px;
+        margin-top: 3px;
     }
 
     .pos {
@@ -361,22 +362,20 @@
         </div>
         <div class="section_content">
             <div class="row row-cols-1 row-cols-md-3 g-4 card_group">
-                {% for one in today_words %}
+                {% for one in card_data %}
                 <div class="col">
                   <div class="card">
                     <div class="level">{{one.today_Lv}}</div>
                     <a class="one_word" href="" >
                         <!-- 단어 -->
-                            {% for char in rendered_words %}
-
+                        {% for char in one.rendered_word %}
                             {% if char == " " %}
-                                <span class="blank_word">&nbsp;&nbsp;&nbsp;</span>
+                                <span class="blank_word">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                             {% else %}
                                 <span class="word">{{ char }}</span>
                             {% endif %}
-                            {% endfor %}
-
-                        </a>
+                        {% endfor %}
+                    </a>
                     <div class="card-body ">
                         <p>{{one.today_pronunciation}}</p>
                         <h5 class="card-title"><span class="pos">[{{one.today_POS}}]</span> {{one.today_meaning}}</h5>
