@@ -131,21 +131,47 @@
         text-align: center;
         border-radius: 8px;
         box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-        background-color: #fff;
-    }
-
-    /* 체크판 스타일 */
-    .hvquiz tr:nth-child(odd) td:nth-child(even),
-    .hvquiz tr:nth-child(even) td:nth-child(odd) {
         background-color: #f9f9f9;
-    }
 
-    .hvquiz tr:nth-child(odd) td:nth-child(odd),
-    .hvquiz tr:nth-child(even) td:nth-child(even) {
+    }
+    .hvquiz td input {
+        outline: none;
+        border: none;
+        width: 50px;
+        height: 50px;
         background-color: #fff;
+
     }
 
+    .horizontal_num, .vertical_num {
+        position: absolute;
+        font-size: 12px; 
+        color: #333; 
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2px 4px; 
+        border-radius: 4px; 
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        z-index: 2; 
+    }
 
+    /* 가로 숫자 스타일 */
+    .horizontal_num {
+        top: 2px;
+        left: 2px;
+    }
+
+    /* 세로 숫자 스타일 */
+    .vertical_num {
+        top: 2px;
+        right: 2px; 
+    }
+
+    /* 테이블 셀 안에 숫자와 입력 칸을 감싸는 부모를 설정 */
+    table.hvquiz td {
+        position: relative; /* 자식 요소 위치 지정 가능하도록 설정 */
+        text-align: center; /* 텍스트 정렬 */
+    }
+    
     .crossword-container {
         display: flex;
         justify-content: center;
@@ -185,7 +211,7 @@
     }
 
     .content_hvkey {
-        margin-left: 24px;
+        margin-left: 48px;
     }
 
     .key_container {
@@ -409,19 +435,51 @@
         <div class="section_title">
             <h2>가로세로 퀴즈</h2>
             <h3>매일 12시 업데이트</h3>
+            <form action="" method="post">
+                <button type="submit">가로세로 퀴즈 리셋</button>
+            </form>
         </div>
         <div class="section_content">
             <div class="content_hvtable">
                 <table class="hvquiz">
                     <tr>
-                        <td>答</td>
+                        
+                        <td><span class="horizontal_num">1</span>出</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><span class="vertical_num">1.</span>だ</td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
+                        <td><span class="vertical_num">2.</span>交</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="horizontal_num">2</span>テ</td>
+                        <td><span class="vertical_num">3.</span>レ</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="horizontal_num">3</span>散</td>
+                        <td><input type="text"></td>
+                        <td><span class="vertical_num">4.</span>か</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -432,24 +490,10 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -457,6 +501,21 @@
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
+                        <td><span class="vertical_num">6.</span>ジ</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="vertical_num">5.</span>溶</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -464,6 +523,33 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="horizontal_num">4</span>中<span class="vertical_num">7.</span></td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><span class="horizontal_num">5</span>パ</td>
+                        <td><input type="text"></td>
+                        <td><span class="vertical_num">8.</span>コ</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -471,17 +557,31 @@
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
+                        <td></td>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><span class="vertical_num">9.</span>布</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td><span class="horizontal_num">6</span>座<span class="vertical_num">10.</span></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
@@ -489,81 +589,11 @@
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td><span class="horizontal_num">7</span>引</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -587,13 +617,30 @@
             </div>
             <div class="content_hvkey">
                 <div class="key_container">
-                    <button id="key_horizontal" class="key active">가로</button>
-                    <button id="key_vertical" class="key">세로</button>
+                    <button href="horizontal/" id="key_horizontal" class="key active" onclick="showContent('horizontal')">가로</button>  
+                    <button href="vertical/" id="key_vertical" class="key" onclick="showContent('vertical')">세로</button>
                 </div>
-                <div class="key_content">
-                    <p>1. JLPT N5 단어. **'대답하다'**를 의미하는 동사입니다. 반대말: 無視する (무시하다)</p> 
-                    <p>2. 매일 랜덤퀴즈, 자동화 </p>
-
+                <div id="horizontal_content" class="key_content">
+                    <p>1. 가능한한 부사 JLPT N3 단어  来るだけ </p>
+                    <p>2. TV프로그램 명사 JLPT N4 단어 ビ番組 </p>
+                    <p>3. 어지러지다 동사 JLPT N2 단어 らる </p>
+                    <p>4. 중순 명사 JLPT N2 단어 旬</p>
+                    <p>5. 컴퓨터 명사 JLPT N5 단어 ソン </p>
+                    <p>6. 방석 명사 JLPT N2 단어 布</p>
+                    <p>7. 만류하다, 말리다 명사 JLPT N2 단어 き止め</p>
+                </div>
+                <div id="vertical_content" class="key_content" style="display: none;">
+                    <p>1. 그러니까 부사 JLPT N4 단어 から</p>
+                    <p>2. 파출소 명사 JLPT N5 단어 </p>
+                    <p>3. 레일, 궤도, 철길 명사 JLPT N4 단어 ール</p>
+                    <p>4. 가방 명사 JLPT N5 단어 </p>
+                    <p>5. 용암 명사 JLPT N2 단어 岩 </p>
+                    <p>6. 점퍼 명사 JLPT N5 단어 ャンー </p>
+                    <p>7. 중학교 명사 JLPT N5 단어 学校</p>
+                    <p>8. 커피 명사 JLPT N5 단어 ーヒ</p>
+                    <p>9. 이불 명사 JLPT N3 단어 団</p>
+                    <p>10. 앉다 명사 JLPT N5 단어 る</p>
+                    
                 </div>
                 
             </div>
@@ -989,7 +1036,28 @@
   });
 });
 
+function showContent(type) {
+    const horizontal = document.getElementById('horizontal_content');
+    const vertical = document.getElementById('vertical_content');
+    const horizontalBtn = document.getElementById('key_horizontal');
+    const verticalBtn = document.getElementById('key_vertical');
+
+    if (type === 'horizontal') {
+        horizontal.style.display = 'block';
+        vertical.style.display = 'none';
+        horizontalBtn.classList.add('active');
+        verticalBtn.classList.remove('active');
+    } else {
+        horizontal.style.display = 'none';
+        vertical.style.display = 'block';
+        verticalBtn.classList.add('active');
+        horizontalBtn.classList.remove('active');
+    }
+}
+
 </script>
+
+
 
 
 {% endblock %}

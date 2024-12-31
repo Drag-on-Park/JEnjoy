@@ -181,5 +181,8 @@ def dictionary_search(request):
     else:
         return render(request, 'dictionary/dictionary_search.html')
 
-
+def horizontal(request):
+    return render(request, 'dictionary/horizontal.html')
+def vertical(request):
+    return render(request, 'dictionary/vertical.html')
 
