@@ -38,11 +38,12 @@ def dictionary(request):
     dictionary = Dictionary.objects.all()    
     #!! 사용자의 JLPT레벨 추가예정
     level = 5
-    # 우선순위
+    # 우선순위 카운트
     cnt = 1
 
     rendered_words = []
     blank_words = []
+    card_data = []
 
     if request.method == 'POST':
 
@@ -83,25 +84,33 @@ def dictionary(request):
     today = timezone.now().date()
     today_words = TodayWord.objects.filter(date = today).order_by('priority')
     # get method 일 때 rendered_words, blank_words 불러오기 
+    # for idx, obj in enumerate(today_words):
+    #     blank_words.append(obj.blank_word)
+    #     blank_word_positions = [obj.today_word.find(today_words[idx].blank_word)]
+
+    #     # idx for idx, char in enumerate(obj.today_word) if char in obj.blank_word
+    
+
+    #     rendered_words.append(generate_blank_word(obj.today_word,blank_word_positions))
+
+        # 카드 데이터 생성
     for idx, obj in enumerate(today_words):
-        blank_words.append(obj.blank_word)
-        blank_word_positions = [obj.today_word.find(today_words[idx].blank_word)]
+        blank_word_positions = [obj.today_word.find(char) for char in obj.blank_word]
+        rendered_word = generate_blank_word(obj.today_word, blank_word_positions)
 
-        # idx for idx, char in enumerate(obj.today_word) if char in obj.blank_word
-    
-
-        rendered_words.append(generate_blank_word(obj.today_word,blank_word_positions))
-
-
-
+        card_data.append({
+            'today_word': obj.today_word,
+            'rendered_word': rendered_word,
+            'blank_word': obj.blank_word,
+            'today_pronunciation': obj.today_pronunciation,
+            'today_meaning': obj.today_meaning,
+            'today_Lv': obj.today_Lv,
+            'today_POS': obj.dictionary.POS if hasattr(obj.dictionary, 'POS') else '',
+        })
     # 12시 > 오늘의 단어 db 저장
-    
 
     context = {
-        'blank_words': blank_words,
-          # test단어 저장
-        'today_words': today_words,
-        'rendered_words': rendered_words,
+        'card_data': card_data
     }
     return render(request, 'dictionary/dictionary.html', context)
 
@@ -172,5 +181,8 @@ def dictionary_search(request):
     else:
         return render(request, 'dictionary/dictionary_search.html')
 
-
+def horizontal(request):
+    return render(request, 'dictionary/horizontal.html')
+def vertical(request):
+    return render(request, 'dictionary/vertical.html')
 
