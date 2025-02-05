@@ -436,7 +436,9 @@
             <h2>가로세로 퀴즈</h2>
             <h3>매일 12시 업데이트</h3>
             <form action="" method="post">
+                {% csrf_token %}
                 <button type="submit">가로세로 퀴즈 리셋</button>
+
             </form>
         </div>
         <div class="section_content">
