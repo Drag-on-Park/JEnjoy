@@ -16,9 +16,9 @@ app.autodiscover_tasks()
 
 # Celery Beat (주기적 작업) 사용
 app.conf.beat_schedule = {
-    'generate-daily-words-at-noon': {
+    'generate-daily-words-at-midnight': {
         'task': 'dictionary.tasks.generate_daily_words',
-        'schedule': crontab(hour=10, minute=40),  # 초기 실행 (주기적 실행은 django-celery-beat에서 설정)
+        'schedule': crontab(hour=00, minute=00),  # 초기 실행 (주기적 실행은 django-celery-beat에서 설정)
     },
 }
 
