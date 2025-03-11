@@ -115,102 +115,68 @@
         background-color: transparent;
     }
 
-    .hvquiz {
-        width: 100%;
+    .crossword {
+        width: auto;
+        table-layout: fixed;
         margin: 20px 0;
-        border-spacing: 1rem;
+        border-collapse: separate;
     }    
 
-    .hvquiz tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    .hvquiz td {
+    .crossword td {
         width: 50px;
         height: 50px;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        max-width: 50px;
+        min-height: 50px;
+        max-height: 50px;
         text-align: center;
         border-radius: 8px;
         box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-        background-color: #f9f9f9;
-
+        background-color: #fff;
+        position: relative;
     }
-    .hvquiz td input {
+
+    .crossword td:empty {
+    background-color: #e3e6ef; /* 비어 있는 칸만 원래 배경 유지 */
+}
+
+    .crossword td input {
         outline: none;
         border: none;
-        width: 50px;
-        height: 50px;
+        width: 100%;
+        height: 100%;
         background-color: #fff;
-
+        border-radius: 8px;
+        text-align: center;
     }
 
-    .horizontal_num, .vertical_num {
+    .across_num, .down_num {
         position: absolute;
         font-size: 12px; 
+        font-weight: bold;
         color: #333; 
         background-color: rgba(255, 255, 255, 0.8);
         padding: 2px 4px; 
         border-radius: 4px; 
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         z-index: 2; 
-    }
+    } 
 
     /* 가로 숫자 스타일 */
-    .horizontal_num {
+    .across_num {
         top: 2px;
         left: 2px;
     }
 
     /* 세로 숫자 스타일 */
-    .vertical_num {
+    .down_num {
         top: 2px;
         right: 2px; 
     }
 
-    /* 테이블 셀 안에 숫자와 입력 칸을 감싸는 부모를 설정 */
-    table.hvquiz td {
-        position: relative; /* 자식 요소 위치 지정 가능하도록 설정 */
-        text-align: center; /* 텍스트 정렬 */
-    }
-    
-    .crossword-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    table.crossword {
-        border-collapse: separate;
-
-    }
-
-    table.crossword td {
-        width: 40px;
-        height: 40px;
-        border: 1px solid #ccc;
-        position: relative;
-        text-align: center;
-    }
-
-    table.crossword .input-cell input {
-        width: 100%;
-        height: 100%;
-        border: none;
-        text-align: center;
-        font-size: 18px;
-        text-transform: uppercase;
-        outline: none;
-        background-color: #fff;
-    }
-
-    table.crossword td .number {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        font-size: 12px;
-        color: #333;
-    }
-
-    .content_hvkey {
+    .content_crosskey {
         margin-left: 48px;
     }
 
@@ -309,15 +275,11 @@
         border-spacing: 1px;
         margin: 0 auto;
     }  
+
     .yoon {
         display: flex;
         margin-right: 24px;
-    }
-    /*  */
-  
-    /*  */
-    
-   
+    }   
 
     .head_yoon {
         background-color: #A2B59F;
@@ -343,12 +305,7 @@
 
     .dakuten_hadakuten td:nth-child(even) {
         background-color: #f9f9f9;
-    }
-    /*  */
-  
-    /*  */
-
-   
+    }  
 
     .dakuten_hadakuten td, th {
         border: 1px solid black;
@@ -365,6 +322,7 @@
 
 {% block content %}
 <div class="container">
+    <!-- section_search -->
     <div class="section_search">
         <!-- 검색 폼 -->
         <form id="search-form" action="{% url 'dictionary:dictionary_search' %}" method="post">
@@ -376,6 +334,7 @@
             </button>
         </form>
     </div>  
+    <!-- section_oneword -->
     <div class="section_oneword">
         <div class="section_title">
             <h2>하루 한 단어</h2>
@@ -415,208 +374,205 @@
                   </div>
                 </div>
 
-                {% endfor %}
-                
-
-
-                
+                {% endfor %}                
             </div>
 
         </div>
 
     </div>
-    <div class="section_hvquiz">
+    <!-- section_crossword -->
+    <div class="section_crossword">
         <div class="section_title">
-            <h2>가로세로 퀴즈</h2>
+            <h2>가로세로 퍼즐</h2>
             <h3>매일 12시 업데이트</h3>
             <form action="" method="post">
                 {% csrf_token %}
-                <button type="submit">가로세로 퀴즈 리셋</button>
+                <button type="submit">가로세로 퍼즐 리셋</button>
 
             </form>
         </div>
         <div class="section_content">
-            <div class="content_hvtable">
-                <table class="hvquiz">
+            <div class="content_crosstable">
+                <table class="crossword">
                     <tr>
-                        
-                        <td><span class="horizontal_num">1</span>出</td>
+                        <td><span class="across_num">1</span>出</td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
-                        <td><span class="vertical_num">1.</span>だ</td>
+                        <td><span class="down_num">1</span>だ</td>
                         <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="vertical_num">2.</span>交</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="horizontal_num">2</span>テ</td>
-                        <td><span class="vertical_num">3.</span>レ</td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="horizontal_num">3</span>散</td>
-                        <td><input type="text"></td>
-                        <td><span class="vertical_num">4.</span>か</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td><span class="vertical_num">6.</span>ジ</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="vertical_num">5.</span>溶</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="horizontal_num">4</span>中<span class="vertical_num">7.</span></td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td><span class="horizontal_num">5</span>パ</td>
-                        <td><input type="text"></td>
-                        <td><span class="vertical_num">8.</span>コ</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
                         <td></td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="vertical_num">9.</span>布</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="down_num">2</span>交</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="horizontal_num">6</span>座<span class="vertical_num">10.</span></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="across_num">2</span>テ</td>
+                        <td><span class="down_num">3</span>レ</td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><span class="across_num">3</span>散</td>
+                        <td><input type="text"></td>
+                        <td><span class="down_num">4</span>か</td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><span class="down_num">6</span>ジ</td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="down_num">5</span>溶</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="across_num">4</span>中<span class="down_num">7</span></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><span class="across_num">5</span>パ</td>
+                        <td><input type="text"></td>
+                        <td><span class="down_num">8</span>コ</td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>ー</td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="down_num">9</span>布</td>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="across_num">6</span>座<span class="down_num">10</span></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><span class="horizontal_num">7</span>引</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="across_num">7</span>引</td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
                         <td><input type="text"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    
                 </table>
                 
             </div>
-            <div class="content_hvkey">
+
+            <div class="content_crosskey">
                 <div class="key_container">
-                    <button href="horizontal/" id="key_horizontal" class="key active" onclick="showContent('horizontal')">가로</button>  
-                    <button href="vertical/" id="key_vertical" class="key" onclick="showContent('vertical')">세로</button>
+                    <button href="across/" id="key_across" class="key active" onclick="showContent('across')">가로</button>  
+                    <button href="down/" id="key_down" class="key" onclick="showContent('down')">세로</button>
                 </div>
-                <div id="horizontal_content" class="key_content">
+                <div id="across_content" class="key_content">
                     <p>1. 가능한한 부사 JLPT N3 단어  来るだけ </p>
                     <p>2. TV프로그램 명사 JLPT N4 단어 ビ番組 </p>
                     <p>3. 어지러지다 동사 JLPT N2 단어 らる </p>
@@ -625,7 +581,7 @@
                     <p>6. 방석 명사 JLPT N2 단어 布</p>
                     <p>7. 만류하다, 말리다 명사 JLPT N2 단어 き止め</p>
                 </div>
-                <div id="vertical_content" class="key_content" style="display: none;">
+                <div id="down_content" class="key_content" style="display: none;">
                     <p>1. 그러니까 부사 JLPT N4 단어 から</p>
                     <p>2. 파출소 명사 JLPT N5 단어 </p>
                     <p>3. 레일, 궤도, 철길 명사 JLPT N4 단어 ール</p>
@@ -636,12 +592,12 @@
                     <p>8. 커피 명사 JLPT N5 단어 ーヒ</p>
                     <p>9. 이불 명사 JLPT N3 단어 団</p>
                     <p>10. 앉다 명사 JLPT N5 단어 る</p>
-                    
                 </div>
-                
             </div>
+
         </div>
     </div>
+    <!-- section_kana -->
     <div class="section_kana">
         <div class="section_title">
             <h2 class="kana_head">카나(히라가나 + 가타카나)</h2>
@@ -1022,38 +978,35 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".key");
-
-  buttons.forEach((button) => {
-    button.addEventListener("mouseenter", () => {
-      buttons.forEach((btn) => btn.classList.remove("active")); // 기존 active 클래스 제거
-      button.classList.add("active"); // 현재 버튼에 active 클래스 추가
+        const buttons = document.querySelectorAll(".key");
+    
+        buttons.forEach((button) => {
+            button.addEventListener("mouseenter", () => {
+                buttons.forEach((btn) => btn.classList.remove("active")); // 기존 active 클래스 제거
+                button.classList.add("active"); // 현재 버튼에 active 클래스 추가
+            });
+        });
     });
-  });
-});
-
-function showContent(type) {
-    const horizontal = document.getElementById('horizontal_content');
-    const vertical = document.getElementById('vertical_content');
-    const horizontalBtn = document.getElementById('key_horizontal');
-    const verticalBtn = document.getElementById('key_vertical');
-
-    if (type === 'horizontal') {
-        horizontal.style.display = 'block';
-        vertical.style.display = 'none';
-        horizontalBtn.classList.add('active');
-        verticalBtn.classList.remove('active');
-    } else {
-        horizontal.style.display = 'none';
-        vertical.style.display = 'block';
-        verticalBtn.classList.add('active');
-        horizontalBtn.classList.remove('active');
+    
+    function showContent(type) {
+        const across = document.getElementById('across_content');
+        const down = document.getElementById('down_content');
+        const acrossBtn = document.getElementById('key_across');
+        const downBtn = document.getElementById('key_down');
+    
+        if (type === 'across') {
+            across.style.display = 'block';
+            down.style.display = 'none';
+            acrossBtn.classList.add('active');
+            downBtn.classList.remove('active');
+        } else {
+            across.style.display = 'none';
+            down.style.display = 'block';
+            downBtn.classList.add('active');
+            acrossBtn.classList.remove('active');
+        }
     }
-}
-
-</script>
-
-
+    </script>
 
 
 {% endblock %}
