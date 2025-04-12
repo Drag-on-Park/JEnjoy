@@ -50,6 +50,17 @@ class TodayWord(models.Model):
     def __str__(self):
         return f"{self.date} - {self.today_word}"
 
+class Puzzle(models.Model):
+    date = models.DateField(auto_now_add=True)  # 생성 날짜
+    grid = models.JSONField(null=True, blank=True)  # 퍼즐 12x12 그리드 저장 (optional, 렌더링 용도)
+
+class PuzzleWord(models.Model):
+    puzzle = models.ForeignKey(Puzzle, on_delete=models.CASCADE, related_name='words')
+    dictionary_entry = models.ForeignKey(Dictionary, on_delete=models.SET_NULL, null=True)
+    clue = models.TextField()
+    direction = models.CharField(max_length=10, choices=[('across', '가로'), ('down', '세로')])
+    start_x = models.IntegerField()
+    start_y = models.IntegerField()
 
 
 # example_sentence 사용자 참여 예문
