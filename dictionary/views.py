@@ -109,3 +109,8 @@ def horizontal(request):
 def vertical(request):
     return render(request, 'dictionary/vertical.html')
 
+def crosspuzzle(request):
+    # 저장된 단어 렌더링
+    pass
+
+
