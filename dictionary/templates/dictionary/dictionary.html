@@ -220,6 +220,13 @@
     }
     .kana_fcol {
         background-color: #f9f9f9;
+    }
+    
+    .kana_char {
+        cursor: pointer;
+    }
+    .kana_char:hover {
+        background-color: #589AF4 !important; 
 
     }
 
@@ -243,7 +250,7 @@
         margin-right: 24px;
     }
 
-    .hiragana_50 thead, .h_yoon, .c_hdakuhadakuten {
+    .hiragana_50 thead, .h_yoon, .hiragana_cell {
         background-color: #BFC8D7;
         color: #fff;
     }
@@ -254,7 +261,7 @@
 
     }
 
-    .katakana_50 thead, .k_yoon, .c_kdakuhadakuten {
+    .katakana_50 thead, .k_yoon, .katakana_cell {
         background-color: #E2D2D2 !important;
         color: #fff;
     }
@@ -315,6 +322,11 @@
     .dakuten_hadakuten p {
         margin: 0;
     }
+
+    /* 모바일 카나 테이블 넘침 */
+    /* .kana_table_wrapper {
+        overflow-x: auto;
+    } */
 
 
 </style>
@@ -619,91 +631,88 @@
                     <tbody>
                         <tr>
                             <td class="kana_fcol">あ행</td>
-                            <td>あ(a, 아)</td>
-                            <td>い(i, 이)</td>
-                            <td>う(u, 우)</td>
-                            <td>え(e, 에)</td>
-                            <td>お(o, 오)</td>
+                            <!-- <td><span class="kana_char" data-kana="あ">あ</span>(a, 아)</td> -->
+                            <td class="kana_char" data-kana="あ">あ(a, 아)</td>
+                            <td class="kana_char" data-kana="い">い(i, 이)</td>
+                            <td class="kana_char" data-kana="う">う(u, 우)</td>
+                            <td class="kana_char" data-kana="え">え(e, 에)</td>
+                            <td class="kana_char" data-kana="お">お(o, 오)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">か행</td>
-                            <td>か(ka, 카)</td>
-                            <td>き(ki, 키)</td>
-                            <td>く(ku, 쿠)</td>
-                            <td>け(ke, 케)</td>
-                            <td>こ(ko, 코)</td>
+                            <td class="kana_char" data-kana="か">か(ka, 카)</td>
+                            <td class="kana_char" data-kana="き">き(ki, 키)</td>
+                            <td class="kana_char" data-kana="く">く(ku, 쿠)</td>
+                            <td class="kana_char" data-kana="け">け(ke, 케)</td>
+                            <td class="kana_char" data-kana="こ">こ(ko, 코)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">さ행</td>
-                            <td>さ(sa, 사)</td>
-                            <td>し(shi, 시)</td>
-                            <td>す(su, 수)</td>
-                            <td>せ(se, 세)</td>
-                            <td>そ(so, 소)</td>
+                            <td class="kana_char" data-kana="さ">さ(sa, 사)</td>
+                            <td class="kana_char" data-kana="し">し(shi, 시)</td>
+                            <td class="kana_char" data-kana="す">す(su, 수)</td>
+                            <td class="kana_char" data-kana="せ">せ(se, 세)</td>
+                            <td class="kana_char" data-kana="そ">そ(so, 소)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">た행</td>
-                            <td>た(ta, 타)</td>
-                            <td>ち(chi, 치)</td>
-                            <td>つ(tsu, 츠)</td>
-                            <td>て(te, 테)</td>
-                            <td>と(to, 토)</td>
+                            <td class="kana_char" data-kana="た">た(ta, 타)</td>
+                            <td class="kana_char" data-kana="ち">ち(chi, 치)</td>
+                            <td class="kana_char" data-kana="つ">つ(tsu, 쓰)</td>
+                            <td class="kana_char" data-kana="て">て(te, 테)</td>
+                            <td class="kana_char" data-kana="と">と(to, 토)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">な행</td>
-                            <td>な(na, 나)</td>
-                            <td>に(ni, 니)</td>
-                            <td>ぬ(nu, 누)</td>
-                            <td>ね(ne, 네)</td>
-                            <td>の(no, 노)</td>
+                            <td class="kana_char" data-kana="な">な(na, 나)</td>
+                            <td class="kana_char" data-kana="に">に(ni, 니)</td>
+                            <td class="kana_char" data-kana="ぬ">ぬ(nu, 누)</td>
+                            <td class="kana_char" data-kana="ね">ね(ne, 네)</td>
+                            <td class="kana_char" data-kana="の">の(no, 노)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">は행</td>
-                            <td>は(ha, 하)</td>
-                            <td>ひ(hi, 히)</td>
-                            <td>ふ(fu, 후)</td>
-                            <td>へ(he, 헤)</td>
-                            <td>ほ(ho, 호)</td>
+                            <td class="kana_char" data-kana="は">は(ha, 하)</td>
+                            <td class="kana_char" data-kana="ひ">ひ(hi, 히)</td>
+                            <td class="kana_char" data-kana="ふ">ふ(fu, 후)</td>
+                            <td class="kana_char" data-kana="へ">へ(he, 헤)</td>
+                            <td class="kana_char" data-kana="ほ">ほ(ho, 호)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ま행</td>
-                            <td>ま(/ma, 마)</td>
-                            <td>み(/mi, 미)</td>
-                            <td>む(/mu, 무)</td>
-                            <td>め(/me, 메)</td>
-                            <td>も(/mo, 모)</td>
+                            <td class="kana_char" data-kana="ま">ま(ma, 마)</td>
+                            <td class="kana_char" data-kana="み">み(mi, 미)</td>
+                            <td class="kana_char" data-kana="む">む(mu, 무)</td>
+                            <td class="kana_char" data-kana="め">め(me, 메)</td>
+                            <td class="kana_char" data-kana="も">も(mo, 모)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">や행</td>
-                            <td>や(ya, 야)</td>
-                            <td></td>
-                            <td>ゆ(yu, 유)</td>
-                            <td></td>
-                            <td>よ(yo, 요)</td>
+                            <td class="kana_char" data-kana="や">や(ya, 야)</td>
+                            <td>&nbsp;</td>
+                            <td class="kana_char" data-kana="ゆ">ゆ(yu, 유)</td>
+                            <td>&nbsp;</td>
+                            <td class="kana_char" data-kana="よ">よ(yo, 요)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ら행</td>
-                            <td>ら(ra, 라)</td>
-                            <td>り(ri, 리)</td>
-                            <td>る(ru, 루)</td>
-                            <td>れ(re, 레)</td>
-                            <td>ろ(ro, 로)</td>
+                            <td class="kana_char" data-kana="ら">ら(ra, 라)</td>
+                            <td class="kana_char" data-kana="り">り(ri, 리)</td>
+                            <td class="kana_char" data-kana="る">る(ru, 루)</td>
+                            <td class="kana_char" data-kana="れ">れ(re, 레)</td>
+                            <td class="kana_char" data-kana="ろ">ろ(ro, 로)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">わ행</td>
-                            <td>わ(wa, 와)</td>
-                            <td>ゐ(wi, 이)</td>
-                            <td></td>
-                            <td>ゑ(we, 에)</td>
-                            <td>を(o, 오)</td>
+                            <td class="kana_char" data-kana="わ">わ(wa, 와)</td>
+                            <td class="kana_char" data-kana="ゐ">ゐ(wi, 이) <span>*고어</span></td>
+                            <td>&nbsp;</td>
+                            <td class="kana_char" data-kana="ゑ">ゑ(we, 에) <span>*고어</span></td>
+                            <td class="kana_char" data-kana="を">を(wo, 오/워)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ん</td>
-                            <td>ん(N, 응)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="5" class="kana_char" data-kana="ん">ん(n, 응)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -722,91 +731,87 @@
                     <tbody>
                         <tr>
                             <td class="kana_fcol">ア행</td>
-                            <td>ア(a, 아)</td>
-                            <td>イ(i, 이)</td>
-                            <td>ウ(u, 우)</td>
-                            <td>エ(e, 에)</td>
-                            <td>オ(o, 오)</td>
+                            <td class="kana_char" data-kana="ア">ア(a, 아)</td>
+                            <td class="kana_char" data-kana="イ">イ(i, 이)</td>
+                            <td class="kana_char" data-kana="ウ">ウ(u, 우)</td>
+                            <td class="kana_char" data-kana="エ">エ(e, 에)</td>
+                            <td class="kana_char" data-kana="オ">オ(o, 오)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">カ행</td>
-                            <td>カ(ka, 카)</td>
-                            <td>キ(ki, 키)</td>
-                            <td>ク(ku, 쿠)</td>
-                            <td>ケ(ke, 케)</td>
-                            <td>コ(ko, 코)</td>
+                            <td class="kana_char" data-kana="カ">カ(ka, 카)</td>
+                            <td class="kana_char" data-kana="キ">キ(ki, 키)</td>
+                            <td class="kana_char" data-kana="ク">ク(ku, 쿠)</td>
+                            <td class="kana_char" data-kana="ケ">ケ(ke, 케)</td>
+                            <td class="kana_char" data-kana="コ">コ(ko, 코)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">サ행</td>
-                            <td >サ(sa, 사)</td>
-                            <td>シ(shi, 시)</td>
-                            <td>ス(su, 수)</td>
-                            <td>セ(se, 세)</td>
-                            <td>ソ(so, 소)</td>
+                            <td class="kana_char" data-kana="サ">サ(sa, 사)</td>
+                            <td class="kana_char" data-kana="シ">シ(shi, 시)</td>
+                            <td class="kana_char" data-kana="ス">ス(su, 스)</td>
+                            <td class="kana_char" data-kana="セ">セ(se, 세)</td>
+                            <td class="kana_char" data-kana="ソ">ソ(so, 소)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">タ행</td>
-                            <td>タ(ta, 타)</td>
-                            <td>チ(chi, 치)</td>
-                            <td>ツ(tsu, 츠)</td>
-                            <td>テ(te, 테)</td>
-                            <td>ト(to, 토)</td>
+                            <td class="kana_char" data-kana="タ">タ(ta, 타)</td>
+                            <td class="kana_char" data-kana="チ">チ(chi, 치)</td>
+                            <td class="kana_char" data-kana="ツ">ツ(tsu, 츠)</td>
+                            <td class="kana_char" data-kana="テ">テ(te, 테)</td>
+                            <td class="kana_char" data-kana="ト">ト(to, 토)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ナ행</td>
-                            <td>ナ(na, 나)</td>
-                            <td>ニ(ni, 니)</td>
-                            <td>ヌ(nu, 누)</td>
-                            <td>ネ(ne, 네)</td>
-                            <td>ノ(no, 노)</td>
+                            <td class="kana_char" data-kana="ナ">ナ(na, 나)</td>
+                            <td class="kana_char" data-kana="ニ">ニ(ni, 니)</td>
+                            <td class="kana_char" data-kana="ヌ">ヌ(nu, 누)</td>
+                            <td class="kana_char" data-kana="ネ">ネ(ne, 네)</td>
+                            <td class="kana_char" data-kana="ノ">ノ(no, 노)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ハ행</td>
-                            <td>ハ(ha, 하)</td>
-                            <td>ヒ(hi, 히)</td>
-                            <td>フ(fu, 후)</td>
-                            <td>ヘ(he, 헤)</td>
-                            <td>ホ(ho, 호)</td>
+                            <td class="kana_char" data-kana="ハ">ハ(ha, 하)</td>
+                            <td class="kana_char" data-kana="ヒ">ヒ(hi, 히)</td>
+                            <td class="kana_char" data-kana="フ">フ(fu, 후)</td>
+                            <td class="kana_char" data-kana="ヘ">ヘ(he, 헤)</td>
+                            <td class="kana_char" data-kana="ホ">ホ(ho, 호)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">マ행</td>
-                            <td>マ(ma, 마)</td>
-                            <td>ミ(mi, 미)</td>
-                            <td>ム(mu, 무)</td>
-                            <td>メ(me, 메)</td>
-                            <td>モ(mo, 모)</td>
+                            <td class="kana_char" data-kana="マ">マ(ma, 마)</td>
+                            <td class="kana_char" data-kana="ミ">ミ(mi, 미)</td>
+                            <td class="kana_char" data-kana="ム">ム(mu, 무)</td>
+                            <td class="kana_char" data-kana="メ">メ(me, 메)</td>
+                            <td class="kana_char" data-kana="モ">モ(mo, 모)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ヤ행</td>
-                            <td>ヤ(ya, 야)</td>
-                            <td></td>
-                            <td>ユ(yu, 유)</td>
-                            <td></td>
-                            <td>ヨ(yo, 요)</td>
+                            <td class="kana_char" data-kana="ヤ">ヤ(ya, 야)</td>
+                            <td>&nbsp;</td>
+                            <td class="kana_char" data-kana="ユ">ユ(yu, 유)</td>
+                            <td>&nbsp;</td>
+                            <td class="kana_char" data-kana="ヨ">ヨ(yo, 요)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ラ행</td>
-                            <td>ラ(ra, 라)</td>
-                            <td>リ(ri, 리)</td>
-                            <td>ル(ru, 루)</td>
-                            <td>レ(re, 레)</td>
-                            <td>ロ(ro, 로)</td>
+                            <td class="kana_char" data-kana="ラ">ラ(ra, 라)</td>
+                            <td class="kana_char" data-kana="リ">リ(ri, 리)</td>
+                            <td class="kana_char" data-kana="ル">ル(ru, 루)</td>
+                            <td class="kana_char" data-kana="レ">レ(re, 레)</td>
+                            <td class="kana_char" data-kana="ロ">ロ(ro, 로)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ワ행</td>
-                            <td>ワ(wa, 와)</td>
-                            <td>ヰ(wi, 이)</td>
-                            <td></td>
-                            <td>ヱ(we, 에)</td>
-                            <td>ヲ(o, 오)</td>
+                            <td class="kana_char" data-kana="ワ">ワ(wa, 와)</td>
+                            <td class="kana_char" data-kana="ヰ">ヰ(wi, 이) <span>*고어</span></td>
+                            <td>&nbsp;</td>
+                            <td class="kana_char" data-kana="ヱ">ヱ(we, 에) <span>*고어</span></td>
+                            <td class="kana_char" data-kana="ヲ">ヲ(wo, 오/워)</td>
                         </tr>
                         <tr>
                             <td class="kana_fcol">ン</td>
-                            <td>ン(N, 응)</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="5" class="kana_char" data-kana="ン">ン(n, 응)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -825,17 +830,17 @@
                         </tr>
                         <tr>
                             <!-- 요음 -->
-                            <td>ゃ</td>
-                            <td>ゅ</td>
-                            <td>ょ</td>
+                            <td class="kana_char" data-kana="ゃ">ゃ</td>
+                            <td class="kana_char" data-kana="ゅ">ゅ</td>
+                            <td class="kana_char" data-kana="ょ">ょ</td>
                             <!-- 촉음 -->
-                            <td>っ</td>
+                            <td class="kana_char" data-kana="っ">っ</td>
                             <!-- 가타카나 요음 -->
-                            <td>ャ</td>
-                            <td>ュ</td>
-                            <td>ョ</td>
+                            <td class="kana_char" data-kana="ャ">ャ</td>
+                            <td class="kana_char" data-kana="ュ">ュ</td>
+                            <td class="kana_char" data-kana="ョ">ョ</td>
                             <!-- 가타카나 촉음 -->
-                            <td>ッ</td>
+                            <td class="kana_char" data-kana="ッ">ッ</td>
                         </tr>
                 </table>
 
@@ -845,86 +850,86 @@
                     </tr>
                     <tr>
                         <th class="dakuhadakuten_caption" colspan="2"><p>히라가나 /</p><p> 가타카나&nbsp;&nbsp;</p></th>
-                        <th class="c_hdakuhadakuten">が행</th>
-                        <th class="c_kdakuhadakuten">ガ행</th>
-                        <th class="c_hdakuhadakuten">ざ행</th>
-                        <th class="c_kdakuhadakuten">ザ행</th>
-                        <th class="c_hdakuhadakuten">だ행</th>
-                        <th class="c_kdakuhadakuten">ダ행</th>
-                        <th class="c_hdakuhadakuten">ば행</th>
-                        <th class="c_kdakuhadakuten">バ행</th>
-                        <th class="c_hdakuhadakuten">ぱ행</th>
-                        <th class="c_kdakuhadakuten">パ행</th>
+                        <th class="hiragana_cell">が행</th>
+                        <th class="katakana_cell">ガ행</th>
+                        <th class="hiragana_cell">ざ행</th>
+                        <th class="katakana_cell">ザ행</th>
+                        <th class="hiragana_cell">だ행</th>
+                        <th class="katakana_cell">ダ행</th>
+                        <th class="hiragana_cell">ば행</th>
+                        <th class="katakana_cell">バ행</th>
+                        <th class="hiragana_cell">ぱ행</th>
+                        <th class="katakana_cell">パ행</th>
                     </tr>
                     <tr>
-                        <td class="c_hdakuhadakuten">あ단</td>
-                        <td class="c_kdakuhadakuten">ア단</td>
-                        <td>が(ga, 가)</td>
-                        <td>ガ(ga, 가)</td>
-                        <td>ざ(za, 자)</td>
-                        <td>ザ(za, 자)</td>
-                        <td>だ(da, 다)</td>
-                        <td>ダ(da, 다)</td>
-                        <td>ば(ba, 바)</td>
-                        <td>バ(ba, 바)</td>
-                        <td>ぱ(pa, 파)</td>
-                        <td>パ(pa, 파)</td>
+                        <td class="hiragana_cell">あ단</td>
+                        <td class="katakana_cell">ア단</td>
+                        <td class="kana_char" data-kana="が">が(ga, 가)</td>
+                        <td class="kana_char" data-kana="ガ">ガ(ga, 가)</td>
+                        <td class="kana_char" data-kana="ざ">ざ(za, 자)</td>
+                        <td class="kana_char" data-kana="ザ">ザ(za, 자)</td>
+                        <td class="kana_char" data-kana="だ">だ(da, 다)</td>
+                        <td class="kana_char" data-kana="ダ">ダ(da, 다)</td>
+                        <td class="kana_char" data-kana="ば">ば(ba, 바)</td>
+                        <td class="kana_char" data-kana="バ">バ(ba, 바)</td>
+                        <td class="kana_char" data-kana="ぱ">ぱ(pa, 파)</td>
+                        <td class="kana_char" data-kana="パ">パ(pa, 파)</td>
                     </tr>
                     <tr>
-                        <td class="c_hdakuhadakuten">い단</td>
-                        <td class="c_kdakuhadakuten">イ단</td>
-                        <td>ぎ(gi, 기)</td>
-                        <td>ギ(gi, 기)</td>
-                        <td>じ(ji, 지)</td>
-                        <td>ジ(ji, 지)</td>
-                        <td>ぢ(ji, 지)</td>
-                        <td>ヂ(ji, 지)</td>
-                        <td>び(bi, 비)</td>
-                        <td>ビ(bi, 비)</td>
-                        <td>ぴ(pi, 피)</td>
-                        <td>ピ(pi, 피)</td>
+                        <td class="hiragana_cell">い단</td>
+                        <td class="katakana_cell">イ단</td>
+                        <td class="kana_char" data-kana="ぎ">ぎ(gi, 기)</td>
+                        <td class="kana_char" data-kana="ギ">ギ(gi, 기)</td>
+                        <td class="kana_char" data-kana="じ">じ(ji, 지)</td>
+                        <td class="kana_char" data-kana="ジ">ジ(ji, 지)</td>
+                        <td class="kana_char" data-kana="ぢ">ぢ(ji, 지)</td>
+                        <td class="kana_char" data-kana="ヂ">ヂ(ji, 지)</td>
+                        <td class="kana_char" data-kana="び">び(bi, 비)</td>
+                        <td class="kana_char" data-kana="ビ">ビ(bi, 비)</td>
+                        <td class="kana_char" data-kana="ぴ">ぴ(pi, 피)</td>
+                        <td class="kana_char" data-kana="ピ">ピ(pi, 피)</td>
                     </tr>
                     <tr>
-                        <td class="c_hdakuhadakuten">う단</td>
-                        <td class="c_kdakuhadakuten">ウ단</td>
-                        <td>ぐ(gu, 구)</td>
-                        <td>グ(gu, 구)</td>
-                        <td>ず(zu, 주)</td>
-                        <td>ズ(zu, 주)</td>
-                        <td>づ(zu, 주)</td>
-                        <td>ヅ(zu, 주)</td>
-                        <td>ぶ(bu, 부)</td>
-                        <td>ブ(bu, 부)</td>
-                        <td>ぷ(pu, 푸)</td>
-                        <td>プ(pu, 푸)</td>
+                        <td class="hiragana_cell">う단</td>
+                        <td class="katakana_cell">ウ단</td>
+                        <td class="kana_char" data-kana="ぐ">ぐ(gu, 구)</td>
+                        <td class="kana_char" data-kana="グ">グ(gu, 구)</td>
+                        <td class="kana_char" data-kana="ず">ず(zu, 주)</td>
+                        <td class="kana_char" data-kana="ズ">ズ(zu, 주)</td>
+                        <td class="kana_char" data-kana="づ">づ(zu, 주)</td>
+                        <td class="kana_char" data-kana="ヅ">ヅ(zu, 주)</td>
+                        <td class="kana_char" data-kana="ぶ">ぶ(bu, 부)</td>
+                        <td class="kana_char" data-kana="ブ">ブ(bu, 부)</td>
+                        <td class="kana_char" data-kana="ぷ">ぷ(pu, 푸)</td>
+                        <td class="kana_char" data-kana="プ">プ(pu, 푸)</td>
                     </tr>
                     <tr>
-                        <td class="c_hdakuhadakuten">え단</td>
-                        <td class="c_kdakuhadakuten">エ단</td>
-                        <td>げ(ge, 게)</td>
-                        <td>ゲ(ge, 게)</td>
-                        <td>ぜ(ze, 제)</td>
-                        <td>ゼ(ze, 제)</td>
-                        <td>で(de, 데)</td>
-                        <td>デ(de, 데)</td>
-                        <td>べ(be, 베)</td>
-                        <td>ベ(be, 베)</td>
-                        <td>ぺ(pe, 페)</td>
-                        <td>ペ(pe, 페)</td>
+                        <td class="hiragana_cell">え단</td>
+                        <td class="katakana_cell">エ단</td>
+                        <td class="kana_char" data-kana="げ">げ(ge, 게)</td>
+                        <td class="kana_char" data-kana="ゲ">ゲ(ge, 게)</td>
+                        <td class="kana_char" data-kana="ぜ">ぜ(ze, 제)</td>
+                        <td class="kana_char" data-kana="ゼ">ゼ(ze, 제)</td>
+                        <td class="kana_char" data-kana="で">で(de, 데)</td>
+                        <td class="kana_char" data-kana="デ">デ(de, 데)</td>
+                        <td class="kana_char" data-kana="べ">べ(be, 베)</td>
+                        <td class="kana_char" data-kana="ベ">ベ(be, 베)</td>
+                        <td class="kana_char" data-kana="ぺ">ぺ(pe, 페)</td>
+                        <td class="kana_char" data-kana="ペ">ペ(pe, 페)</td>
                     </tr>
                     <tr>
-                        <td class="c_hdakuhadakuten">お단</td>
-                        <td class="c_kdakuhadakuten">オ단</td>
-                        <td>ご(go, 고)</td>
-                        <td>ゴ(go, 고)</td>
-                        <td>ぞ(zo, 조)</td>
-                        <td>ゾ(zo, 조)</td>
-                        <td>ど(do, 도)</td>
-                        <td>ド(do, 도)</td>
-                        <td>ぼ(bo, 보)</td>
-                        <td>ボ(bo, 보)</td>
-                        <td>ぽ(po, 포)</td>
-                        <td>ポ(po, 포)</td>
+                        <td class="hiragana_cell">お단</td>
+                        <td class="katakana_cell">オ단</td>
+                        <td class="kana_char" data-kana="ご">ご(go, 고)</td>
+                        <td class="kana_char" data-kana="ゴ">ゴ(go, 고)</td>
+                        <td class="kana_char" data-kana="ぞ">ぞ(zo, 조)</td>
+                        <td class="kana_char" data-kana="ゾ">ゾ(zo, 조)</td>
+                        <td class="kana_char" data-kana="ど">ど(do, 도)</td>
+                        <td class="kana_char" data-kana="ド">ド(do, 도)</td>
+                        <td class="kana_char" data-kana="ぼ">ぼ(bo, 보)</td>
+                        <td class="kana_char" data-kana="ボ">ボ(bo, 보)</td>
+                        <td class="kana_char" data-kana="ぽ">ぽ(po, 포)</td>
+                        <td class="kana_char" data-kana="ポ">ポ(po, 포)</td>
                     </tr>
                 </table>
                 
@@ -1007,7 +1012,21 @@
             acrossBtn.classList.remove('active');
         }
     }
-    </script>
+
+    document.querySelectorAll('.kana_char').forEach(elem => {
+    elem.addEventListener('click', () => {
+      const kana = elem.dataset.kana;
+
+      navigator.clipboard.writeText(kana).then(() => {
+        alert(`복사됨: ${kana}`);
+      }).catch(err => {
+        alert('복사 실패 😢');
+        console.error(err);
+      });
+    });
+  });
+</script>
+
 
 
 {% endblock %}

@@ -1,5 +1,5 @@
 from celery import shared_task
-from .models import Dictionary, TodayWord
+from .models import Dictionary, TodayWord, Puzzle, PuzzleWord
 import random
 
 # 00시 하루 한단어 생성
@@ -54,3 +54,13 @@ def generate_daily_words():
         )
     
     return f"새로운 단어 {len(today_words)}개가 생성됨"
+
+def generate_daily_puzzle():
+    # 시작위치 0~3 x 0~3
+    # 첫단어방향 가로
+    # 
+    grid = [['' for _ in range(12)] for _ in range(12)]
+    
+    def find_cross_candidate(char, direction):
+        if direction == 'down':
+            return Dictionary.objects.filter(word__contains=char) # **
