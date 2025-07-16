@@ -23,11 +23,17 @@
     <!-- 검색결과 -->
     <!-- 결과 쿼리가 있을 때 -->
     {% for one in search_result %}
-    {{one.word}}
-    {{one.pronunciation}}
-    {{one.meaning}}
-    {{one.POS}}
-    {{one.Lv}}
+    단어: {{one.word}}
+    <br>
+    발음: {{one.pronunciation}}
+    <br>
+    뜻: {{one.meaning}}
+    <br>
+
+    품사: {{one.POS}}
+    <br>
+
+    레벨: {{one.Lv}}
     <br>
     {% endfor %}
      
