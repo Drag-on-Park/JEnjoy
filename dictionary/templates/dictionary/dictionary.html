@@ -85,6 +85,13 @@
         align-items: center;
         height: 42px;
         margin-top: 3px;
+        /* background-color: transparent; */
+        /* transition: background-color 0.3s ease; */
+    }
+    .blank_word.correct {
+        background-color: #E1F0FF;
+        color: #3D9CFB;
+        margin-top: 0;
     }
 
     .pos {
@@ -323,6 +330,26 @@
         margin: 0;
     }
 
+    .copy-toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 9999;
+    }
+
+    .copy-toast.show {
+        opacity: 1;
+    }
+
+
     /* 모바일 카나 테이블 넘침 */
     /* .kana_table_wrapper {
         overflow-x: auto;
@@ -355,7 +382,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 card_group">
                 {% for one in card_data %}
                 <div class="col">
-                  <div class="card">
+                  <div class="card" data-answer="{{ one.blank_word }}">
                     <div class="level">{{one.today_Lv}}</div>
                     <a class="one_word" href="" >
                         <!-- 단어 -->
@@ -398,7 +425,7 @@
             <h2>가로세로 퍼즐</h2>
             <h3>매일 12시 업데이트</h3>
             <h3>카나 클릭시 복사!!</h3>
-            <form action="" method="post">
+            <form action="{% url 'dictionary:dictionary_cross_puzzle' %}" method="post">
                 {% csrf_token %}
                 <button type="submit">한글 ⬅️&nbsp;&nbsp;&nbsp;➡️ 일본어</button>
 
@@ -942,6 +969,7 @@
 
     </div>
     <h2>예문을 추가해주세요</h2>
+    <div id="copyToast" class="copy-toast">복사됨!</div>
 
     <h2>
         
@@ -993,6 +1021,29 @@
             });
         });
     });
+    document.querySelectorAll('.answer_form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const input = this.querySelector('.answer_search');
+            const userAnswer = input.value.trim();
+            
+            const card = this.closest('.card');
+            const correctAnswer = card.dataset.answer;
+
+            if (userAnswer === correctAnswer) {
+            // blank_word를 찾아서 변경
+            const blanks = card.querySelectorAll('.blank_word');
+            blanks.forEach((el, idx) => {
+                el.classList.add('correct');
+                el.textContent = correctAnswer[idx];
+            });
+            input.value = '';
+            } else {
+            alert("틀렸습니다!");
+            }
+        });
+    });
     
     function showContent(type) {
         const across = document.getElementById('across_content');
@@ -1013,18 +1064,29 @@
         }
     }
 
+  const toast = document.getElementById('copyToast');
+
+    function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 1000); // 1초 뒤 사라짐
+    }
+
     document.querySelectorAll('.kana_char').forEach(elem => {
     elem.addEventListener('click', () => {
-      const kana = elem.dataset.kana;
+        const kana = elem.dataset.kana;
 
-      navigator.clipboard.writeText(kana).then(() => {
-        alert(`복사됨: ${kana}`);
-      }).catch(err => {
-        alert('복사 실패 😢');
+        navigator.clipboard.writeText(kana).then(() => {
+        showToast(`복사됨: ${kana}`);
+        }).catch(err => {
+        showToast('복사 실패 😢');
         console.error(err);
-      });
+        });
     });
-  });
+    });
 </script>
 
 

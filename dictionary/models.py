@@ -57,7 +57,7 @@ class Puzzle(models.Model):
 class PuzzleWord(models.Model):
     puzzle = models.ForeignKey(Puzzle, on_delete=models.CASCADE, related_name='words')
     dictionary_entry = models.ForeignKey(Dictionary, on_delete=models.SET_NULL, null=True)
-    clue = models.TextField()
+    clue = models.TextField() # !! 설명 
     direction = models.CharField(max_length=10, choices=[('across', '가로'), ('down', '세로')])
     start_x = models.IntegerField()
     start_y = models.IntegerField()
