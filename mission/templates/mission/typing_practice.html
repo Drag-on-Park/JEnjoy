@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+ 
+{% block title %}일본어 타자연습{% endblock %}
+    
+<!-- style -->
+{% block extra_style %}
+<style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #kana {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    #romaji {
+      font-size: 24px;
+      color: gray;
+      margin-bottom: 20px;
+    }
+    input {
+      font-size: 24px;
+      padding: 10px;
+      width: 300px;
+    }
+    .stats {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+  {% endblock %}
+{% block content %}
+<h1>typing practice</h1>
+<h1>
+    진행시간/제한시간 있어야되고 현재 타자속도 / (정확도)오타율 / 포인트 득점 >> 열매?? / 포인트는 구메 >> 경험치로 교환하거나 / 젠몬 경험치
+    자리 - 왼 위 가운데 아래 오른 위 가운데 아래   중간 숫자
+    낱말
+    단문
+    장문
+</h1>
+<div id="kana">がっこう</div>
+  <div id="romaji">gakkou</div>
+  <input id="input" type="text" placeholder="로마자로 입력하세요" autocomplete="off" />
+  
+  <div class="stats">
+    <p>총 타수: <span id="total">0</span></p>
+    <p>정답 수: <span id="correct">0</span></p>
+  </div>
+
+  <script>
+    const kanaList = ["がっこう", "しんぶん", "きょう", "あい", "さかな", "にほん", "すし", "こんにちは"];
+    const kanaToRomaji = {
+      "あ": "a", "い": "i", "う": "u", "え": "e", "お": "o",
+      "か": "ka", "き": "ki", "く": "ku", "け": "ke", "こ": "ko",
+      "さ": "sa", "し": "shi", "す": "su", "せ": "se", "そ": "so",
+      "た": "ta", "ち": "chi", "つ": "tsu", "て": "te", "と": "to",
+      "な": "na", "に": "ni", "ぬ": "nu", "ね": "ne", "の": "no",
+      "は": "ha", "ひ": "hi", "ふ": "fu", "へ": "he", "ほ": "ho",
+      "ま": "ma", "み": "mi", "む": "mu", "め": "me", "も": "mo",
+      "や": "ya", "ゆ": "yu", "よ": "yo",
+      "ら": "ra", "り": "ri", "る": "ru", "れ": "re", "ろ": "ro",
+      "わ": "wa", "を": "wo", "ん": "n",
+      "が": "ga", "ぎ": "gi", "ぐ": "gu", "げ": "ge", "ご": "go",
+      "ざ": "za", "じ": "ji", "ず": "zu", "ぜ": "ze", "ぞ": "zo",
+      "だ": "da", "で": "de", "ど": "do",
+      "ば": "ba", "び": "bi", "ぶ": "bu", "べ": "be", "ぼ": "bo",
+      "ぱ": "pa", "ぴ": "pi", "ぷ": "pu", "ぺ": "pe", "ぽ": "po",
+      "きゃ": "kya", "きゅ": "kyu", "きょ": "kyo",
+      "しゃ": "sha", "しゅ": "shu", "しょ": "sho",
+      "ちゃ": "cha", "ちゅ": "chu", "ちょ": "cho",
+      "にゃ": "nya", "にゅ": "nyu", "にょ": "nyo",
+      "ひゃ": "hya", "ひゅ": "hyu", "ひょ": "hyo",
+      "みゃ": "mya", "みゅ": "myu", "みょ": "myo",
+      "りゃ": "rya", "りゅ": "ryu", "りょ": "ryo",
+      "ぎゃ": "gya", "ぎゅ": "gyu", "ぎょ": "gyo",
+      "じゃ": "ja", "じゅ": "ju", "じょ": "jo",
+      "びゃ": "bya", "びゅ": "byu", "びょ": "byo",
+      "ぴゃ": "pya", "ぴゅ": "pyu", "ぴょ": "pyo",
+      "っ": ""  // 따로 처리
+    };
+
+    let currentKana = "";
+    let currentRomaji = "";
+    let total = 0;
+    let correct = 0;
+
+    const inputEl = document.getElementById("input");
+    const kanaEl = document.getElementById("kana");
+    const romajiEl = document.getElementById("romaji");
+    const totalEl = document.getElementById("total");
+    const correctEl = document.getElementById("correct");
+
+    function getRomaji(kanaWord) {
+      let romaji = "";
+      for (let i = 0; i < kanaWord.length; i++) {
+        if (kanaWord[i] === "っ") {
+          const next = kanaWord.slice(i + 1, i + 3);
+          const nextRomaji = kanaToRomaji[next] || kanaToRomaji[kanaWord[i + 1]];
+          if (nextRomaji) romaji += nextRomaji[0];
+          continue;
+        }
+        const twoKana = kanaWord.slice(i, i + 2);
+        if (kanaToRomaji[twoKana]) {
+          romaji += kanaToRomaji[twoKana];
+          i++;
+        } else {
+          romaji += kanaToRomaji[kanaWord[i]] || "[?]";
+        }
+      }
+      return romaji;
+    }
+
+    function nextProblem() {
+      inputEl.value = "";
+      currentKana = kanaList[Math.floor(Math.random() * kanaList.length)];
+      currentRomaji = getRomaji(currentKana);
+      kanaEl.innerText = currentKana;
+      romajiEl.innerText = currentRomaji;
+    }
+
+    inputEl.addEventListener("input", () => {
+      const userInput = inputEl.value.trim().toLowerCase();
+      if (userInput === currentRomaji) {
+        total++;
+        correct++;
+        nextProblem();
+      } else if (!currentRomaji.startsWith(userInput)) {
+        // 오타
+        total++;
+        nextProblem();
+      }
+
+      totalEl.innerText = total;
+      correctEl.innerText = correct;
+    });
+
+    nextProblem();
+  </script>
+
+{% endblock %}

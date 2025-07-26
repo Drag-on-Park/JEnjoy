@@ -42,7 +42,6 @@ def dictionary(request):
     return render(request, 'dictionary/dictionary.html', context)
 
 def dictionary_search(request):
-
     # search word == 일본어 로직
     # search 들어온 값 확인 후 맞게 설계
     if request.method == 'POST':
