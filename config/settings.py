@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'user',
     'board',
     'dictionary',
-    'django_celery_beat'
+    'django_celery_beat',
+    'mission'
 
 ]
 

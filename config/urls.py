@@ -28,6 +28,7 @@ urlpatterns = [
     path('write/', include('write.urls')),
     path('search/', include('search.urls')),
     path('user/', include('user.urls')),
+    path('mission/', include('mission.urls')),
 
     path('', views.home, name='home'), # Home뷰
     
