@@ -4,6 +4,7 @@ from django.db import models
 class Dictionary(models.Model):
     word = models.CharField(max_length=100)  # 일본어 단어
     pronunciation = models.CharField(max_length=100)
+    romaji = models.CharField(max_length=100,null=True,blank=True) # pronunciation >> 로마표기
     meaning = models.TextField()  # 단어의 뜻
     audio_path = models.CharField(max_length=255)  # 발음 오디오 경로
     POS = models.CharField(max_length=50)  # 품사
