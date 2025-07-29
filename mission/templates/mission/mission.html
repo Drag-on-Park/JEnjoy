@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 
+{% block extra_style %}
+<style>
+    .mission-content{
+        /* display: flex; */
+    }
+</style>
+{% endblock %}
+<!-- Content -->
 {% block content %}
-<h1>mission</h1>
-<a href="{% url 'mission:typing_practice' %}">타자연습</a>
+<div class="container">
+    <div class="mission-content">
+        <h1>Mission</h1>
+        <a href="">일일미션</a>
+        <a href="">주간미션</a>
+        <a href="">원갈미션</a>
+        <a href="">깜짝미션</a>
+        <a href="{% url 'mission:typing_practice' %}">타자연습</a>
+    </div>
+</div>
 {% endblock %}
