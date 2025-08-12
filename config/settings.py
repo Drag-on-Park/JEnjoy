@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,7 +49,8 @@ INSTALLED_APPS = [
     'board',
     'dictionary',
     'django_celery_beat',
-    'mission'
+    'mission',
+    'social_django',
 
 ]
 
@@ -59,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -141,3 +145,15 @@ CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis를 메시지 브로커�
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
+# auth
+AUTH_USER_MODEL = 'user.User'
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',  # 구글 OAuth2
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+GOOGLE_OAUTH_CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
+GOOGLE_OAUTH_CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'  # 로그인 성공 후 이동할 URL

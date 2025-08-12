@@ -1,7 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-class User(models.Model):
+class User(AbstractUser):
     nickname = models.CharField(max_length=50)
     level = models.CharField(max_length=10)
     photo_url = models.ImageField()     # !이미지필드 경로추가
@@ -9,9 +10,19 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True) 
     email = models.EmailField(unique=True)  # 이메일 중복 불가 설정
 
+    @property
+    def avatar_url(self):
+        import urllib.parse
+        seed = urllib.parse.quote(self.username)
+        return f"https://api.dicebear.com/6.x/identicon/svg?seed={seed}"
+
+    
 
 
 
+# 유저 상세 
+class User_Detail(models.Model):
+    pass
 
 # 기본 사용자 모델에는 username, password, email, first_name, last_name 등 기본적인 필드들이 포함.
     # username은 식별자

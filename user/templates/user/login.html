@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid mt-5">
+    <div class="d-flex justify-content-center mb-5">
+        <form method="post" class="border p-4 rounded mt-4" style="width: 300px;">
+            <h2 class="text-center mb-4">Login</h2>
+            {% if error %}
+            <p style="color: red;" class="text-center">{{ error }}</p>
+            {% endif %}
+            {% csrf_token %}
+            <div class="mb-3">
+                <!-- <label for="email" class="form-label">Email:</label> -->
+                <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="mb-3">
+                <!-- <label for="password" class="form-label">Password:</label> -->
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                    required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-4">Submit</button>
+            <a class="text-center text-decoration-none black fs-6" href="">
+                <h6>비밀번호를 잊어버리셨나요?</h6>
+            </a>
+            <a href="/oauth/login/google-oauth2/">
+                    <i className="fab fa-google"></i> 구글 로그인
+            </a>
+            <!-- 카카오톡 공식 아이콘이 없어서 대체로 이렇게 씀 -->
+            <a href="">
+                <i class="fas fa-comment"></i> <!-- 말풍선 아이콘 -->
+                <span>Kakao</span>
+            </a>
+            <a href="">
+                <i class="fab fa-github"></i>
+            </a>
+
+
+        </form>
+    </div>
+</div>
+{% endblock %}
