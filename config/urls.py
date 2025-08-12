@@ -29,6 +29,7 @@ urlpatterns = [
     path('search/', include('search.urls')),
     path('user/', include('user.urls')),
     path('mission/', include('mission.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 
     path('', views.home, name='home'), # Home뷰
     
