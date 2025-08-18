@@ -3,6 +3,10 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
+    first_name = None
+    last_name = None
+
+    name = models.CharField(max_length=50)
     nickname = models.CharField(max_length=50)
     level = models.CharField(max_length=10)
     photo_url = models.ImageField()     # !이미지필드 경로추가

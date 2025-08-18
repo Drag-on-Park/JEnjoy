@@ -157,3 +157,17 @@ GOOGLE_OAUTH_CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'  # 로그인 성공 후 이동할 URL
+
+## fist_name + last_name Adapter
+SOCIALACCOUNT_ADAPTER = 'accounts.adapters.MySocialAccountAdapter'
+
+
+# GOOGLE SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') # Gmail 주소
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')     # 발급받은 앱 비밀번호
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
