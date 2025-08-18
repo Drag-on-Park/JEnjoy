@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra-style %}
+<link href="{% static 'css/user.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container-fluid mt-5">
+    <div class="d-flex justify-content-center mb-5">
+        <div class="border p-4 rounded mt-4 register-container">
+            <h2 class="text-center mb-4">회원 가입</h2>
+            {% if message %}
+            <p style="color: green;" class="text-center">{{ message }}</p>
+            {% endif %}
+
+            {% if error %}
+            <p style="color: red;" class="text-center">{{ error }}</p>
+            {% endif %}
+            <form method="post" enctype="multipart/form-data" class="register-form">
+                {% csrf_token %}
+                <input type="email" id="email" name="email" class="form-control md-3" placeholder="Email" required>
+                <button type="button" id="send-verification-code" class="btn btn-secondary w-100 mt-2">인증 코드 발송</button>
+                
+                <input type="text" id="verification_code" name="email_verification_code" class="form-control mt-3" placeholder="인증 코드 입력" required>
+                <!-- 발송 후 >> 인증코드 확인 -->
+                <button type="button" id="send-verification-code" class="btn btn-success w-100 mt-2">인증 코드 확인</button>
+
+                <div class="mb-3 d-flex mt-3">
+                    <div style="flex: 1;">
+                        <input type="text" id="name" name="name" class="form-control" placeholder="이름"
+                            required>
+                    </div>
+                </div>
+                <input type="text" id="nickname" name="nickname" class="form-control mb-3" placeholder="Nickname"
+                    required>
+
+                <input type="text" id="phone_number" name="phone_number" class="form-control mb-3" placeholder="핸드폰 번호"
+                    required>
+
+                <input type="password" id="password1" name="password1" class="form-control mb-3" placeholder="비밀번호"
+                    required>
+
+                <input type="password" id="password2" name="password2" class="form-control mb-3" placeholder="비밀번호 확인"
+                    required>
+
+                <label for="photo" class="form-label">프로필(선택사항)</label>
+                <input type="file" id="photo" name="photo" class="form-control mb-3">
+                <button type="submit" class="btn btn-primary w-100">등록</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('send-verification-code');
+
+        btn.addEventListener('click', function () {
+            const email = document.getElementById('email').value;
+
+            // 1. 버튼 상태 먼저 바꾸기
+            btn.innerText = '인증 코드 발송 중...';
+            btn.disabled = true;
+            btn.style.backgroundColor = '#ccc';
+
+            // 2. 이메일 발송 요청 비동기로 수행
+            fetch('{% url "user:send_verification_code" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 성공하면 버튼 문구 확정
+                    btn.innerText = '인증 코드가 발송되었습니다';
+                } else {
+                    // 실패하면 버튼 원래 상태로 복원
+                    btn.innerText = '인증 코드 보내기';
+                    btn.disabled = false;
+                    btn.style.backgroundColor = ''; // 원래 색상
+                    alert('코드 발송에 실패했습니다. 다시 시도해주세요.');
+                }
+            })
+            .catch(() => {
+                btn.innerText = '인증 코드 보내기';
+                btn.disabled = false;
+                btn.style.backgroundColor = '';
+                alert('네트워크 오류가 발생했습니다.');
+            });
+        });
+    });
+
+</script>
+{% endblock %}
