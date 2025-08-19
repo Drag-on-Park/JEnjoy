@@ -16,7 +16,7 @@ services:
     build: .
     container_name: je_web
     volumes:
-      - /var/www/JEnjoy:/app
+      - .:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -28,8 +28,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - /var/www/JEnjoy/nginx/conf.d:/etc/nginx/conf.d
-      - /var/www/JEnjoy/static:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./static:/usr/share/nginx/html
     depends_on:
       - web
 volumes:
