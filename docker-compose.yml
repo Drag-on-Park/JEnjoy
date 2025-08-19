@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  postgres:
+    image: "postgres:15"
+    container_name: je_postgres
+    environment:
+      POSTGRES_DB: jenjoy
+      POSTGRES_USER: drag
+      POSTGRES_PASSWORD:  Drag-on-Park12
+    ports:
+      - "35432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: je_web
+    volumes:
+      - /var/www/JEnjoy:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  nginx:
+    image: nginx:latest
+    container_name: je_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - /var/www/JEnjoy/nginx/conf.d:/etc/nginx/conf.d
+      - /var/www/JEnjoy/static:/usr/share/nginx/html
+    depends_on:
+      - web
+volumes:
+  postgres_data:
