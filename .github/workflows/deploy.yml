@@ -19,6 +19,9 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
+          # test
+          pwd
+          ls -la
           # 배포 스크립트
           cd ~/JEnjoy
           git pull origin main
