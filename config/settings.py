@@ -99,13 +99,14 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'jenjoy',
-#         'USER': 'drag',
-#         'PASSWORD': 'Drag-on-Park12',
-#         'HOST': 'postgres',    
-#         'PORT': '5432',        # 컨테이너 내부 포트
+#         'NAME': os.getenv.("DB_NAME"),
+#         'USER': os.getenv.("DB_USER"),
+#         'PASSWORD': os.getenv.("DB_PASSWORD"),
+#         'HOST': os.getenv.("DB_HOST"),    
+#         'PORT': os.getenv.("DB_PORT"),        # 컨테이너 내부 포트
 #     }
 # }
+
 
 
 # Password validation
