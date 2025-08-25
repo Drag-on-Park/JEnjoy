@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-(hi$b(7n_os4sg27qhsl*dbxa6z3xx7m-l07ywb^9npibc2o!y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["54.180.120.118", "3.35.9.116"]
+ALLOWED_HOSTS = ["127.0.0.1", "54.180.120.118", "3.35.9.116", "192.168.0.12"]
 
 
 # Application definition
@@ -164,8 +164,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-GOOGLE_OAUTH_CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
-GOOGLE_OAUTH_CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'  # 로그인 성공 후 이동할 URL
