@@ -8,6 +8,8 @@ def user(request):
     return render(request, 'user/user.html')
 
 def login(request):
+    ## 이전 url로 돌아가기 추가구현 예정
+    
     return render(request, 'user/login.html')
 
 def register(request):
