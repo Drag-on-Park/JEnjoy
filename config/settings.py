@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-(hi$b(7n_os4sg27qhsl*dbxa6z3xx7m-l07ywb^9npibc2o!y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "54.180.120.118", "3.35.9.116", "192.168.0.12"]
+ALLOWED_HOSTS = ["127.0.0.1", "54.180.120.118", "3.35.9.116", "192.168.0.12", "localhost"]
 
 
 # Application definition
@@ -183,3 +183,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') # Gmail 주소
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')     # 발급받은 앱 비밀번호
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+## 이미지 필드 저장
+MEDIA_ROOT = os.path.join(BASE_DIR, "media") # 실제 저장될 폴더
+MEDIA_URL = "/media/"                       # URL 접근 prefix

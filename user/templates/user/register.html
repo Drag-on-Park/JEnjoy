@@ -18,11 +18,18 @@
             <form method="post" enctype="multipart/form-data" class="register-form">
                 {% csrf_token %}
                 <input type="email" id="email" name="email" class="form-control md-3" placeholder="Email" required>
-                <button type="button" id="send-verification-code" class="btn btn-secondary w-100 mt-2">인증 코드 발송</button>
+                <button type="button" id="send-code-btn" class="btn btn-secondary w-100 mt-2">인증 코드 발송</button>
+                <p id="message"></p>
                 
                 <input type="text" id="verification_code" name="email_verification_code" class="form-control mt-3" placeholder="인증 코드 입력" required>
                 <!-- 발송 후 >> 인증코드 확인 -->
-                <button type="button" id="send-verification-code" class="btn btn-success w-100 mt-2">인증 코드 확인</button>
+                <button type="button" id="verify-code-btn" class="btn btn-success w-100 mt-2">인증 코드 확인</button>
+
+                
+            </form>
+
+            <form method="post" enctype="multipart/form-data" class="register-form">
+                {% csrf_token %}
 
                 <div class="mb-3 d-flex mt-3">
                     <div style="flex: 1;">
@@ -52,17 +59,20 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const btn = document.getElementById('send-verification-code');
+        const sendBtn = document.getElementById('send-code-btn');
+        const verifyBtn = document.getElementById('verify-code-btn');
+        const messageEl = document.getElementById('message');
 
-        btn.addEventListener('click', function () {
+        // 인증 코드 발송
+        sendBtn.addEventListener('click', function () {
             const email = document.getElementById('email').value;
 
-            // 1. 버튼 상태 먼저 바꾸기
-            btn.innerText = '인증 코드 발송 중...';
-            btn.disabled = true;
-            btn.style.backgroundColor = '#ccc';
+            // 버튼 상태 먼저 바꾸기
+            sendBtn.innerText = '인증 코드 발송 중...';
+            sendBtn.disabled = true;
+            sendBtn.style.backgroundColor = '#ccc';
 
-            // 2. 이메일 발송 요청 비동기로 수행
+            // 이메일 발송 요청 비동기로 수행
             fetch('{% url "user:send_verification_code" %}', {
                 method: 'POST',
                 headers: {
@@ -75,22 +85,60 @@
             .then(data => {
                 if (data.success) {
                     // 성공하면 버튼 문구 확정
-                    btn.innerText = '인증 코드가 발송되었습니다';
+                    // sendBtn.innerText = '인증 코드가 발송되었습니다';
+                    // sendBtn.style.color = "green";
+                    messageEl.style.color = "green";
+                    messageEl.innerText = '인증 코드가 발송되었습니다';
+
                 } else {
                     // 실패하면 버튼 원래 상태로 복원
-                    btn.innerText = '인증 코드 보내기';
-                    btn.disabled = false;
-                    btn.style.backgroundColor = ''; // 원래 색상
-                    alert('코드 발송에 실패했습니다. 다시 시도해주세요.');
+                    // sendBtn.innerText = data.error;
+                    // sendBtn.style.color = "red";
+                    messageEl.style.color = "red";
+                    messageEl.innerText = data.error;
                 }
+                sendBtn.disabled = false;
+                sendBtn.style.backgroundColor = ''; // 원래 색상
+                sendBtn.innerText = '인증 코드 발송';
             })
-            .catch(() => {
-                btn.innerText = '인증 코드 보내기';
-                btn.disabled = false;
-                btn.style.backgroundColor = '';
-                alert('네트워크 오류가 발생했습니다.');
+            .catch(err => {
+                console.error(err)
+                messageEl.style.color = "red";
+                messageEl.innerText = '네트워크 오류';
+                sendBtn.disabled = false;
+                sendBtn.style.backgroundColor = '';
+                sendBtn.innerText = '인증 코드 발송';
             });
         });
+
+        //  인증 코드 확인
+        verifyBtn.addEventListener('click', function() {
+            const code = document.getElementById('verification_code').value;
+
+            fetch('{% url "user:verify_email_code" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token}}',
+                },
+                body: JSON.stringify({ email_verification_code: code})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    messageEl.style.color = "green";
+                    messageEl.innerText = data.message;
+                } else {
+                    messageEl.style.color = "red";
+                    messageEl.innerText = data.error;
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                messageEl.style.color = "red";
+                messageEl.innerText = '네트워크 오류';
+            })
+        })
     });
 
 </script>
