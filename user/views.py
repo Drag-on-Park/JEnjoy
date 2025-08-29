@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 from django.http import JsonResponse
 from .utils import send_verification_email, generate_verification_code
@@ -22,25 +22,6 @@ def login(request):
     return render(request, 'user/login.html')
 
 def register(request):
-
-    if request.method == 'POST':
-        # 이메일
-        # 이름
-        # 닉네임
-        # 핸드폰번호
-        # 비밀번호
-        # 비밀번호 확인
-        # 이메일 불러 와야되는데 어떻게 할건지
-        #!!!!!! def verify_email_code(request):검증 후 검증됐다 뭔가를 register로 보내야됨
-        # 
-        user = User.objects.create(
-
-        )
-
-        pass
-        
-    
-
     # 유효성 검증 - 이메일(아이디) 중복 / 비밀번호 규칙
     # DB 저장(비밀번호 해시)
     # 성공 실패 응답 구조정리
@@ -49,9 +30,49 @@ def register(request):
     ## WARNING 회원가입 실패(reason: duplicate_email)
     ## ERROR   DB 저장 실패 등 예외상황
 
-    # 
+    if request.method == 'POST':
+        # 이메일
+        # 이름
+        # 닉네임
+        # 핸드폰번호
+        # 비밀번호
+        # 비밀번호 확인
 
-    return render(request,'user/register.html' )
+        # 이메일 불러 와야되는데 어떻게 할건지
+        #!!!!!! def verify_email_code(request):검증 후 검증됐다 뭔가를 register로 보내야됨
+        email_verified = request.POST.get("email_verified", "false")
+        if email_verified != "true":
+            return JsonResponse({"error": "이메일 인증이 필요합니다."}, status=400)
+        
+        email = request.POST.get("verified_email")
+        name = request.POST['name']
+        nickname = request.POST['nickname']
+        phone_number = request.POST['phone_number']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        photo  = request.FILES.get('photo')
+
+        # 비밀번호 검증
+        # photo_url 구현
+
+
+        user = User.objects.create(
+            email=email,
+            password=password1,
+            nickname=nickname,
+            phone_number=phone_number,
+            photo_url=photo,
+            name=name
+        )
+        user.save()
+        user.set_password(password1)        
+        user.save()
+
+        login(request, user)
+        return redirect("/")
+    else:
+        return render(request,'user/register.html' )
+
 
 def send_verification_code(request):
     if request.method == 'POST':

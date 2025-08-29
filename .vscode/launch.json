@@ -6,14 +6,16 @@
     "configurations": [
         {
             "name": "Python 디버거: Django",
-            "type": "debugpy",
+            "type": "python",
             "request": "launch",
             "args": [
-                "runserver"
+                "runserver",
+                "0.0.0.0:8500"
             ],
             "django": true,
             "autoStartBrowser": false,
-            "program": "${workspaceFolder}/manage.py"
+            "program": "${workspaceFolder}/manage.py",
+            "python": "/home/gordparker/miniconda3/envs/jen/bin/python"
         }
     ]
 }

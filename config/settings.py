@@ -184,6 +184,9 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') # Gmail 주소
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')     # 발급받은 앱 비밀번호
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+print(repr(EMAIL_HOST_USER))
+print(repr(EMAIL_HOST_PASSWORD))
+
 ## 이미지 필드 저장
 MEDIA_ROOT = os.path.join(BASE_DIR, "media") # 실제 저장될 폴더
 MEDIA_URL = "/media/"                       # URL 접근 prefix
